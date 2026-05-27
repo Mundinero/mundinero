@@ -25,7 +25,7 @@
 
     html, body {
       height: 100%;
-      background: #06090f;
+      background: var(--tinta);
       color: var(--crema);
       font-family: var(--sans);
       overflow-x: hidden;
@@ -37,62 +37,19 @@
       position: fixed;
       inset: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-      opacity: 0.03;
+      opacity: 0.035;
       pointer-events: none;
-      z-index: 300;
+      z-index: 100;
     }
 
-    /* ── SPACE BACKGROUND ── */
-    .bg-space {
+    /* ── BACKGROUND GLOW ── */
+    .bg-glow {
       position: fixed;
       inset: 0;
-      z-index: 0;
-      background: linear-gradient(140deg, #06090f 0%, #070b16 55%, #0c0e1a 100%);
-      overflow: hidden;
-    }
-    .earth-orb {
-      position: absolute;
-      width: min(860px, 68vw);
-      height: min(860px, 68vw);
-      border-radius: 50%;
-      top: -28%;
-      right: -8%;
       background:
-        radial-gradient(circle at 32% 38%, rgba(40,105,230,0.5) 0%, rgba(15,50,140,0.65) 38%, rgba(4,18,60,0.88) 68%, #030a20 100%);
-      border: 1px solid rgba(80,140,255,0.12);
-      box-shadow:
-        0 0 90px rgba(50,120,255,0.18),
-        0 0 260px rgba(20,65,200,0.08),
-        inset 0 0 160px rgba(0,0,0,0.55);
-    }
-    .earth-orb::before {
-      content: '';
-      position: absolute;
-      inset: -18px;
-      border-radius: 50%;
-      background: transparent;
-      box-shadow: 0 0 50px rgba(70,150,255,0.22), 0 0 25px rgba(70,150,255,0.12);
-    }
-    .earth-glow {
-      position: absolute;
-      width: min(700px, 55vw);
-      height: 300px;
-      border-radius: 50%;
-      top: -60px;
-      right: min(160px, 10vw);
-      background: radial-gradient(ellipse, rgba(50,130,255,0.35) 0%, transparent 70%);
-      filter: blur(50px);
-    }
-    .stars {
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(circle, rgba(255,255,255,0.7) 1px, transparent 1px),
-        radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px),
-        radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px);
-      background-size: 320px 320px, 210px 210px, 170px 170px;
-      background-position: 0 0, 80px 60px, 160px 130px;
-      opacity: 0.5;
+        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(81,112,255,0.11) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 80% 80%, rgba(52,216,127,0.05) 0%, transparent 60%);
+      pointer-events: none;
     }
 
     /* ── TICKER ── */
@@ -100,12 +57,12 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       height: 32px;
-      background: rgba(6,9,15,0.96);
-      border-bottom: 1px solid rgba(107,135,255,0.1);
+      background: rgba(31,30,29,0.95);
+      border-bottom: 1px solid rgba(247,246,243,0.06);
       overflow: hidden;
       display: flex;
       align-items: center;
-      z-index: 100;
+      z-index: 50;
       backdrop-filter: blur(8px);
     }
     .ticker-label {
@@ -131,8 +88,7 @@
       font-weight: 500;
       padding: 0 24px;
       letter-spacing: 0.04em;
-      color: rgba(247,246,243,0.45);
-      font-family: var(--sans);
+      color: rgba(247,246,243,0.55);
     }
     .ti b   { color: var(--crema); font-weight: 600; margin: 0 4px; font-family: var(--mono); }
     .up     { color: var(--verde); font-family: var(--mono); }
@@ -144,495 +100,247 @@
 
     /* ── PAGE ── */
     .page {
-      position: relative;
-      z-index: 1;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      padding-top: 32px;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 24px 72px;
+      position: relative;
+      z-index: 1;
     }
 
-    /* ── NAV ── */
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 22px 48px;
+    /* ── LOGO ── */
+    .logo-wrap {
+      margin-bottom: 52px;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards 0.2s;
     }
-    .nav-logo img {
-      height: 28px;
-      width: auto;
+    .logo-img {
+      width: min(400px, 80vw);
+      height: auto;
       display: block;
     }
-    .nav-center {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      background: rgba(247,246,243,0.05);
-      border: 1px solid rgba(247,246,243,0.08);
-      border-radius: 999px;
-      padding: 7px 18px;
-      gap: 14px;
-    }
-    .price-chip {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 12px;
-    }
-    .price-chip .asset { font-weight: 500; color: rgba(247,246,243,0.4); font-family: var(--sans); letter-spacing: 0.06em; }
-    .price-chip .val   { font-weight: 600; color: var(--crema); font-family: var(--mono); }
-    .price-chip .chg   { font-size: 11px; font-family: var(--mono); }
-    .price-chip .chg.up { color: var(--verde); }
-    .price-chip .chg.dn { color: var(--rojo); }
-    .chip-sep { width: 1px; height: 14px; background: rgba(247,246,243,0.12); }
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .btn-pill {
-      background: rgba(247,246,243,0.07);
-      border: 1px solid rgba(247,246,243,0.1);
-      color: var(--crema);
-      font-family: var(--sans);
-      font-size: 13px;
-      font-weight: 500;
-      padding: 8px 20px;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: background 0.2s;
-      letter-spacing: 0.01em;
-    }
-    .btn-pill:hover { background: rgba(247,246,243,0.12); }
-    .btn-icon {
-      width: 38px; height: 38px;
-      border-radius: 50%;
-      background: rgba(247,246,243,0.07);
-      border: 1px solid rgba(247,246,243,0.1);
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      color: var(--crema);
-      transition: background 0.2s;
-      font-size: 13px;
-      letter-spacing: 0.05em;
-    }
-    .btn-icon:hover { background: rgba(247,246,243,0.12); }
 
-    /* ── HERO GRID ── */
-    .hero {
-      flex: 1;
-      display: grid;
-      grid-template-columns: 1fr 168px 400px;
-      gap: 18px;
-      padding: 16px 48px 48px;
-      align-items: start;
-    }
-
-    /* ── LEFT COLUMN ── */
-    .hero-left { display: flex; flex-direction: column; }
-
+    /* ── EYEBROW ── */
     .eyebrow {
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--azul);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      opacity: 0;
-      animation: fade-up 0.6s ease forwards 0.15s;
-    }
-    .eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--azul); }
-
-    .headline {
-      font-family: var(--serif);
-      font-size: clamp(48px, 6.5vw, 90px);
-      font-weight: 700;
-      line-height: 1.0;
-      letter-spacing: -0.02em;
-      color: var(--crema);
-      margin-bottom: 18px;
-      opacity: 0;
-      animation: fade-up 0.6s ease forwards 0.25s;
-    }
-    .headline em { font-style: italic; color: var(--azul); }
-
-    .subheadline {
-      font-size: clamp(14px, 1.5vw, 17px);
-      font-weight: 400;
-      color: rgba(247,246,243,0.38);
-      letter-spacing: 0.02em;
-      margin-bottom: 40px;
-      opacity: 0;
-      animation: fade-up 0.6s ease forwards 0.35s;
-    }
-
-    /* ── ASSET ICONS ── */
-    .assets-row {
-      display: flex;
-      gap: 10px;
       margin-bottom: 48px;
       opacity: 0;
-      animation: fade-up 0.6s ease forwards 0.45s;
-    }
-    .asset-icon {
-      width: 46px; height: 46px;
-      border-radius: 50%;
-      background: rgba(247,246,243,0.06);
-      border: 1px solid rgba(247,246,243,0.09);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 17px;
-      cursor: default;
-      transition: background 0.2s, border-color 0.2s;
-      user-select: none;
-    }
-    .asset-icon:hover {
-      background: rgba(107,135,255,0.12);
-      border-color: rgba(107,135,255,0.35);
-    }
-
-    /* ── POPULAR / MERCADOS ── */
-    .popular-header {
+      animation: fade-up 0.8s ease forwards 0.35s;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
-      opacity: 0;
-      animation: fade-up 0.6s ease forwards 0.55s;
-    }
-    .popular-title {
-      font-family: var(--serif);
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--crema);
-    }
-    .popular-nav { display: flex; gap: 6px; }
-    .popular-nav button {
-      width: 26px; height: 26px;
-      border-radius: 50%;
-      border: 1px solid rgba(247,246,243,0.12);
-      background: transparent;
-      color: rgba(247,246,243,0.5);
-      font-size: 13px;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s;
-    }
-    .popular-nav button:hover {
-      background: rgba(247,246,243,0.07);
-      color: var(--crema);
-    }
-
-    .popular-cards {
-      display: flex;
-      gap: 12px;
-      opacity: 0;
-      animation: fade-up 0.6s ease forwards 0.62s;
-    }
-    .mkt-card {
-      flex: 1;
-      height: 156px;
-      border-radius: 20px;
-      overflow: hidden;
-      position: relative;
-      cursor: pointer;
-      transition: transform 0.25s, box-shadow 0.25s;
-    }
-    .mkt-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
-    }
-    .mkt-card-bg {
-      position: absolute;
-      inset: 0;
-    }
-    .mkt-card:nth-child(1) .mkt-card-bg {
-      background: linear-gradient(145deg, rgba(25,55,165,0.9) 0%, rgba(8,28,90,0.95) 100%);
-    }
-    .mkt-card:nth-child(2) .mkt-card-bg {
-      background: linear-gradient(145deg, rgba(18,65,50,0.9) 0%, rgba(6,28,22,0.95) 100%);
-    }
-    .mkt-card-inner {
-      position: absolute;
-      inset: 0;
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .mkt-label {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--crema);
-      letter-spacing: 0.03em;
-    }
-    .mkt-sub {
-      font-size: 10px;
-      color: rgba(247,246,243,0.4);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-top: 3px;
-      font-family: var(--mono);
-    }
-    .mkt-bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .mkt-price {
-      background: rgba(255,255,255,0.12);
-      backdrop-filter: blur(8px);
-      border-radius: 999px;
-      padding: 5px 13px;
-      font-family: var(--mono);
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--crema);
-    }
-    .mkt-btn {
-      width: 34px; height: 34px;
-      border-radius: 50%;
-      background: var(--azul-vivo);
-      display: flex; align-items: center; justify-content: center;
-      color: #fff;
-      font-size: 15px;
-    }
-
-    /* ── CENTER COLUMN (category tabs) ── */
-    .hero-center {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      opacity: 0;
-      animation: fade-up 0.6s ease forwards 0.3s;
-    }
-    .cat-tab {
-      display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 9px;
-      padding: 14px 10px;
-      border-radius: 16px;
-      background: rgba(247,246,243,0.04);
-      border: 1px solid rgba(247,246,243,0.06);
-      cursor: pointer;
-      transition: all 0.2s;
-      text-align: center;
+      gap: 10px;
     }
-    .cat-tab:hover { background: rgba(247,246,243,0.07); }
-    .cat-tab.active {
-      background: rgba(247,246,243,0.09);
-      border-color: rgba(247,246,243,0.13);
+    .eyebrow::before, .eyebrow::after {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--azul);
+      opacity: 0.55;
     }
-    .cat-icon-wrap {
-      width: 46px; height: 46px;
-      border-radius: 12px;
-      background: rgba(247,246,243,0.06);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
-      transition: background 0.2s;
-    }
-    .cat-tab.active .cat-icon-wrap {
-      background: var(--tinta);
-    }
-    .cat-label {
-      font-size: 10px;
+
+    /* ── LAUNCH DATE ── */
+    .launch-date {
+      font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(247,246,243,0.5);
-    }
-    .cat-tab.active .cat-label { color: rgba(247,246,243,0.8); }
-
-    /* ── RIGHT CARD ── */
-    .hero-right {
+      color: rgba(247,246,243,0.28);
+      margin-bottom: 22px;
       opacity: 0;
-      animation: fade-up 0.6s ease forwards 0.4s;
-    }
-    .card {
-      background: rgba(10,18,45,0.62);
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
-      border: 1px solid rgba(107,135,255,0.14);
-      border-radius: 24px;
-      padding: 28px 26px;
-    }
-    .card-title {
-      font-family: var(--serif);
-      font-size: 32px;
-      font-weight: 700;
-      line-height: 1.1;
-      color: var(--crema);
-      margin-bottom: 8px;
-    }
-    .card-title em { font-style: italic; color: var(--azul); }
-    .card-sub {
-      font-size: 13px;
-      color: rgba(247,246,243,0.4);
-      line-height: 1.55;
-      margin-bottom: 24px;
+      animation: fade-up 0.8s ease forwards 0.5s;
     }
 
-    /* Countdown */
-    .cd-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 7px;
-      margin-bottom: 12px;
+    /* ── COUNTDOWN ── */
+    .countdown {
+      display: flex;
+      gap: 2px;
+      margin-bottom: 56px;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards 0.55s;
     }
-    .cdb {
-      background: rgba(247,246,243,0.05);
+    .cd-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 96px;
+      padding: 18px 12px 14px;
+      background: rgba(247,246,243,0.03);
       border: 0.5px solid rgba(247,246,243,0.07);
-      border-radius: 12px;
-      padding: 12px 6px;
-      text-align: center;
     }
-    .cdb-num {
+    .cd-block:first-child { border-radius: 8px 0 0 8px; }
+    .cd-block:last-child  { border-radius: 0 8px 8px 0; }
+    .cd-num {
       font-family: var(--serif);
-      font-size: clamp(28px, 3.5vw, 38px);
+      font-size: clamp(44px, 7vw, 68px);
       font-weight: 700;
       line-height: 1;
       color: var(--crema);
-      letter-spacing: -0.02em;
+      letter-spacing: -0.03em;
+      transition: color 0.15s;
     }
-    .cdb-lbl {
+    .cd-block:hover .cd-num { color: var(--azul); }
+    .cd-label {
       font-size: 9px;
       font-weight: 600;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: rgba(247,246,243,0.28);
-      margin-top: 4px;
+      margin-top: 5px;
     }
-    .launch-lbl {
-      text-align: center;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(247,246,243,0.2);
-      margin-bottom: 18px;
+    .cd-sep {
+      display: flex;
+      align-items: center;
+      padding: 0 2px;
+      padding-bottom: 22px;
+      font-family: var(--serif);
+      font-size: 32px;
+      color: rgba(247,246,243,0.12);
+      font-weight: 300;
     }
 
-    /* Progress */
-    .prog-wrap { margin-bottom: 22px; }
-    .prog-head {
+    /* ── PROGRESS ── */
+    .progress-wrap {
+      width: 100%;
+      max-width: 460px;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards 0.7s;
+    }
+    .progress-label {
       display: flex;
       justify-content: space-between;
       font-size: 10px;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
-      color: rgba(247,246,243,0.22);
-      margin-bottom: 6px;
+      color: rgba(247,246,243,0.28);
+      margin-bottom: 7px;
     }
-    .prog-head span { color: var(--verde); }
-    .prog-track {
+    .progress-label span { color: var(--verde); }
+    .progress-track {
       height: 2px;
       background: rgba(247,246,243,0.07);
       border-radius: 1px;
       overflow: hidden;
     }
-    .prog-fill {
+    .progress-fill {
       height: 100%;
       background: linear-gradient(90deg, var(--azul-vivo), var(--verde));
       border-radius: 1px;
       transition: width 1s ease;
     }
 
-    /* Divider */
-    .card-sep { height: 1px; background: rgba(247,246,243,0.07); margin: 20px 0; }
-
-    /* Newsletter */
-    .nl-lbl {
+    /* ── NEWSLETTER ── */
+    .newsletter {
+      width: 100%;
+      max-width: 440px;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards 0.82s;
+    }
+    .nl-label {
       font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: rgba(247,246,243,0.28);
-      margin-bottom: 11px;
+      text-align: center;
+      margin-bottom: 12px;
     }
     .nl-form {
       display: flex;
-      background: rgba(247,246,243,0.04);
-      border: 1px solid rgba(247,246,243,0.09);
-      border-radius: 12px;
+      border: 1px solid rgba(247,246,243,0.11);
+      border-radius: 8px;
       overflow: hidden;
-      margin-bottom: 9px;
+      background: rgba(247,246,243,0.03);
       transition: border-color 0.2s;
     }
     .nl-form:focus-within { border-color: rgba(107,135,255,0.5); }
     .nl-input {
       flex: 1;
-      padding: 12px 15px;
+      padding: 13px 16px;
       background: transparent;
       border: none;
       outline: none;
       color: var(--crema);
       font-family: var(--sans);
       font-size: 13px;
+      font-weight: 400;
     }
-    .nl-input::placeholder { color: rgba(247,246,243,0.2); }
+    .nl-input::placeholder { color: rgba(247,246,243,0.22); }
     .nl-btn {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      padding: 12px 16px;
-      background: var(--crema);
+      padding: 13px 18px;
+      background: var(--azul-vivo);
       border: none;
-      color: #06090f;
+      color: #fff;
       font-family: var(--sans);
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       cursor: pointer;
       transition: background 0.2s;
-      border-radius: 0 10px 10px 0;
       white-space: nowrap;
     }
-    .nl-btn:hover { background: #e2e1de; }
-    .nl-btn.done { background: var(--verde); color: #06090f; cursor: default; }
-    .nl-btn svg { flex-shrink: 0; }
+    .nl-btn:hover { background: #3a57e8; }
+    .nl-btn.done  { background: var(--verde); cursor: default; }
     .nl-note {
       font-size: 10px;
-      color: rgba(247,246,243,0.16);
+      color: rgba(247,246,243,0.18);
+      text-align: center;
+      margin-top: 9px;
       letter-spacing: 0.03em;
     }
 
     /* ── FOOTER ── */
     .footer {
-      position: relative;
-      z-index: 1;
-      padding: 15px 48px;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      padding: 14px 28px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-top: 1px solid rgba(247,246,243,0.05);
-      background: rgba(6,9,15,0.8);
+      background: rgba(31,30,29,0.85);
       backdrop-filter: blur(12px);
+      z-index: 50;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards 0.95s;
     }
     .footer-by {
       font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: rgba(247,246,243,0.18);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: rgba(247,246,243,0.28);
     }
-    .footer-by b { color: rgba(247,246,243,0.38); font-weight: 600; }
-    .footer-links { display: flex; gap: 20px; }
-    .footer-links a {
+    .footer-contact {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .footer-contact-label {
       font-size: 10px;
       font-weight: 600;
-      letter-spacing: 0.09em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(247,246,243,0.18);
+      color: rgba(247,246,243,0.28);
+    }
+    .footer-icon-link {
+      display: flex;
+      align-items: center;
+      color: rgba(247,246,243,0.28);
       text-decoration: none;
       transition: color 0.2s;
     }
-    .footer-links a:hover { color: var(--azul); }
+    .footer-icon-link:hover { color: var(--azul); }
+    .footer-icon-link svg { display: block; }
 
     /* ── ANIMATIONS ── */
     @keyframes fade-up {
@@ -641,32 +349,18 @@
     }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) {
-      .hero { grid-template-columns: 1fr 150px 360px; gap: 14px; padding: 12px 32px 40px; }
-      .nav, .footer { padding-left: 32px; padding-right: 32px; }
-    }
-    @media (max-width: 860px) {
-      .hero { grid-template-columns: 1fr; }
-      .hero-center { flex-direction: row; flex-wrap: wrap; }
-      .cat-tab { flex: 1 1 80px; }
-      .nav-center { display: none; }
-      .hero, .nav { padding-left: 24px; padding-right: 24px; }
-      .footer { padding-left: 24px; padding-right: 24px; flex-direction: column; gap: 8px; text-align: center; }
-    }
-    @media (max-width: 520px) {
-      .popular-cards { flex-direction: column; }
-      .headline { font-size: 44px; }
+    @media (max-width: 560px) {
+      .countdown { gap: 1px; }
+      .cd-block { min-width: 70px; padding: 14px 8px 10px; }
+      .cd-sep { font-size: 22px; }
+      .footer { flex-direction: column; gap: 8px; text-align: center; }
+      .logo-img { width: min(300px, 82vw); }
     }
   </style>
 </head>
 <body>
 
-<!-- BACKGROUND -->
-<div class="bg-space">
-  <div class="stars"></div>
-  <div class="earth-orb"></div>
-  <div class="earth-glow"></div>
-</div>
+<div class="bg-glow"></div>
 
 <!-- TICKER -->
 <div class="ticker">
@@ -699,172 +393,90 @@
   </div>
 </div>
 
-<div class="page">
+<!-- MAIN -->
+<main class="page">
 
-  <!-- NAV -->
-  <nav class="nav">
-    <a class="nav-logo" href="#">
-      <img src="MudineroIso.svg" alt="Mundinero" height="28">
+  <!-- LOGO -->
+  <div class="logo-wrap">
+    <img class="logo-img" src="MundineroIso.png" alt="Mundinero">
+  </div>
+
+  <!-- EYEBROW -->
+  <p class="eyebrow">Próximamente</p>
+
+  <!-- LAUNCH DATE -->
+  <p class="launch-date" id="launch-label">Lanzamiento · 8 de junio, 2026</p>
+
+  <!-- COUNTDOWN -->
+  <div class="countdown">
+    <div class="cd-block">
+      <span class="cd-num" id="cd-d">00</span>
+      <span class="cd-label">Días</span>
+    </div>
+    <div class="cd-sep">·</div>
+    <div class="cd-block">
+      <span class="cd-num" id="cd-h">00</span>
+      <span class="cd-label">Horas</span>
+    </div>
+    <div class="cd-sep">·</div>
+    <div class="cd-block">
+      <span class="cd-num" id="cd-m">00</span>
+      <span class="cd-label">Min</span>
+    </div>
+    <div class="cd-sep">·</div>
+    <div class="cd-block">
+      <span class="cd-num" id="cd-s">00</span>
+      <span class="cd-label">Seg</span>
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Construcción en curso</span>
+      <span id="pct">0%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="prog-fill" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div class="newsletter">
+    <p class="nl-label">Sé el primero en entrar</p>
+    <div class="nl-form">
+      <input class="nl-input" type="email" placeholder="tu@correo.com" id="nl-email" autocomplete="email">
+      <button class="nl-btn" id="nl-btn" onclick="subscribe()">Notificarme</button>
+    </div>
+    <p class="nl-note">Sin spam · Gratis · Solo te avisamos cuando abramos</p>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-by">Por Monexus S.A.S. de C.V. · Marca registrada IMPI</div>
+  <div class="footer-contact">
+    <span class="footer-contact-label">Contacto</span>
+
+    <!-- Instagram -->
+    <a class="footer-icon-link" href="https://instagram.com/mundinero" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="20" height="20" rx="5.5" stroke="currentColor" stroke-width="1.8"/>
+        <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.8"/>
+        <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+      </svg>
     </a>
-    <div class="nav-center">
-      <div class="price-chip">
-        <span class="asset">BTC</span>
-        <span class="val">$83,240</span>
-        <span class="chg up">▲ +1.84%</span>
-      </div>
-      <div class="chip-sep"></div>
-      <div class="price-chip">
-        <span class="asset">USD/MXN</span>
-        <span class="val">18.24</span>
-        <span class="chg up">▲ +0.12%</span>
-      </div>
-      <div class="chip-sep"></div>
-      <div class="price-chip">
-        <span class="asset">CETES</span>
-        <span class="val">9.50%</span>
-      </div>
-    </div>
-    <div class="nav-right">
-      <button class="btn-pill" onclick="document.getElementById('nl-email').focus(); document.getElementById('nl-email').scrollIntoView({behavior:'smooth'})">Suscribirme</button>
-      <div class="btn-icon">
-        <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><rect y="0" width="14" height="1.5" rx="0.75" fill="currentColor"/><rect y="4.25" width="14" height="1.5" rx="0.75" fill="currentColor"/><rect y="8.5" width="14" height="1.5" rx="0.75" fill="currentColor"/></svg>
-      </div>
-    </div>
-  </nav>
 
-  <!-- HERO -->
-  <main class="hero">
-
-    <!-- LEFT -->
-    <div class="hero-left">
-      <p class="eyebrow">Próximamente</p>
-      <h1 class="headline">El futuro del<br>dinero <em>habla.</em></h1>
-      <p class="subheadline">Nosotros traducimos.</p>
-
-      <div class="assets-row">
-        <div class="asset-icon" title="Bitcoin">₿</div>
-        <div class="asset-icon" title="Dólar / Peso">$</div>
-        <div class="asset-icon" title="Euro">€</div>
-        <div class="asset-icon" title="Oro">◈</div>
-        <div class="asset-icon" title="CETES">%</div>
-      </div>
-
-      <div class="popular-header">
-        <span class="popular-title">Mercados</span>
-        <div class="popular-nav">
-          <button aria-label="Anterior">‹</button>
-          <button aria-label="Siguiente">›</button>
-        </div>
-      </div>
-
-      <div class="popular-cards">
-        <div class="mkt-card">
-          <div class="mkt-card-bg"></div>
-          <div class="mkt-card-inner">
-            <div>
-              <div class="mkt-label">USD / MXN</div>
-              <div class="mkt-sub">Tipo de cambio</div>
-            </div>
-            <div class="mkt-bottom">
-              <div class="mkt-price">18.24</div>
-              <div class="mkt-btn">↗</div>
-            </div>
-          </div>
-        </div>
-        <div class="mkt-card">
-          <div class="mkt-card-bg"></div>
-          <div class="mkt-card-inner">
-            <div>
-              <div class="mkt-label">Bitcoin</div>
-              <div class="mkt-sub">BTC / USD</div>
-            </div>
-            <div class="mkt-bottom">
-              <div class="mkt-price">$83,240</div>
-              <div class="mkt-btn">↗</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- CENTER (secciones del sitio) -->
-    <div class="hero-center">
-      <div class="cat-tab active">
-        <div class="cat-icon-wrap">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="4" fill="rgba(107,135,255,0.9)"/><circle cx="11" cy="11" r="9" stroke="rgba(107,135,255,0.4)" stroke-width="1.2"/><circle cx="11" cy="11" r="6" stroke="rgba(107,135,255,0.2)" stroke-width="1" stroke-dasharray="3 3"/></svg>
-        </div>
-        <span class="cat-label">Radar</span>
-      </div>
-      <div class="cat-tab">
-        <div class="cat-icon-wrap">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="12" width="4" height="8" rx="1" fill="rgba(247,246,243,0.4)"/><rect x="9" y="7" width="4" height="13" rx="1" fill="rgba(247,246,243,0.5)"/><rect x="16" y="3" width="4" height="17" rx="1" fill="rgba(247,246,243,0.6)"/></svg>
-        </div>
-        <span class="cat-label">Mercados</span>
-      </div>
-      <div class="cat-tab">
-        <div class="cat-icon-wrap">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="rgba(247,246,243,0.35)" stroke-width="1.2"/><path d="M7 11h8M11 7v8" stroke="rgba(247,246,243,0.5)" stroke-width="1.4" stroke-linecap="round"/></svg>
-        </div>
-        <span class="cat-label">Divisas</span>
-      </div>
-      <div class="cat-tab">
-        <div class="cat-icon-wrap">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 7h12M5 11h8M5 15h10" stroke="rgba(247,246,243,0.45)" stroke-width="1.4" stroke-linecap="round"/></svg>
-        </div>
-        <span class="cat-label">Columna</span>
-      </div>
-    </div>
-
-    <!-- RIGHT CARD -->
-    <div class="hero-right">
-      <div class="card">
-        <h2 class="card-title">Sé el primero<br>en <em>entrar.</em></h2>
-        <p class="card-sub">Medio financiero editorial de México<br>y el mundo. Lanzamiento 8 jun 2026.</p>
-
-        <div class="cd-grid">
-          <div class="cdb"><div class="cdb-num" id="cd-d">00</div><div class="cdb-lbl">Días</div></div>
-          <div class="cdb"><div class="cdb-num" id="cd-h">00</div><div class="cdb-lbl">Horas</div></div>
-          <div class="cdb"><div class="cdb-num" id="cd-m">00</div><div class="cdb-lbl">Min</div></div>
-          <div class="cdb"><div class="cdb-num" id="cd-s">00</div><div class="cdb-lbl">Seg</div></div>
-        </div>
-        <p class="launch-lbl" id="launch-label">Lanzamiento · 8 de junio, 2026</p>
-
-        <div class="prog-wrap">
-          <div class="prog-head">
-            <span>Construcción en curso</span>
-            <span id="pct">0%</span>
-          </div>
-          <div class="prog-track">
-            <div class="prog-fill" id="prog-fill" style="width:0%"></div>
-          </div>
-        </div>
-
-        <div class="card-sep"></div>
-
-        <p class="nl-lbl">Avísame cuando abramos</p>
-        <div class="nl-form">
-          <input class="nl-input" type="email" placeholder="tu@correo.com" id="nl-email" autocomplete="email">
-          <button class="nl-btn" id="nl-btn" onclick="subscribe()">
-            Notificarme
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="rgba(6,9,15,0.2)"/><path d="M6 8h4M8 6l2 2-2 2" stroke="#06090f" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </div>
-        <p class="nl-note">Sin spam · Gratis · Solo te avisamos cuando abramos</p>
-      </div>
-    </div>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-by">Por <b>Monexus</b> · Marca registrada IMPI</div>
-    <div class="footer-links">
-      <a href="https://instagram.com/mundinero" target="_blank" rel="noopener">Instagram</a>
-      <a href="mailto:hola@mundinero.com">Contacto</a>
-    </div>
-  </footer>
-
-</div>
+    <!-- Email -->
+    <a class="footer-icon-link" href="mailto:azahed@monexus.mx" aria-label="Correo">
+      <svg width="17" height="16" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="22" height="18" rx="3" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M1.5 4.5L12 12.5L22.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+</footer>
 
 <script>
   const TARGET = new Date('2026-06-08T09:00:00-06:00');
@@ -909,7 +521,7 @@
     btn.classList.add('done');
     document.getElementById('nl-email').disabled = true;
     document.getElementById('nl-note').textContent = 'Te avisamos el 8 de junio. ¡Gracias!';
-    document.getElementById('nl-note').style.color = 'rgba(52,216,127,0.6)';
+    document.getElementById('nl-note').style.color = 'rgba(52,216,127,0.65)';
   }
 
   document.getElementById('nl-email').addEventListener('keydown', e => {
