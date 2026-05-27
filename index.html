@@ -379,6 +379,50 @@
     }
     .footer-links a:hover { color: var(--azul); }
 
+    /* ── HERO SVG LOGO ── */
+    .wordmark {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards 0.1s;
+    }
+    .wordmark-name {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: rgba(247,246,243,0.65);
+    }
+    .wordmark-name span { color: var(--azul); }
+
+    .hero-logo-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fade-up 1s ease forwards 0.35s;
+    }
+    .mundinero-hero {
+      width: min(380px, 84vw);
+      height: auto;
+      display: block;
+    }
+
+    @keyframes spin-cw {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    .ring-inner-group {
+      transform-origin: 300px 300px;
+      animation: spin-cw 28s linear infinite;
+    }
+    .ring-outer-group {
+      transform-origin: 300px 300px;
+      animation: spin-cw 48s linear infinite;
+    }
+
     /* ── ANIMATIONS ── */
     @keyframes fade-up {
       from { opacity: 0; transform: translateY(16px); }
@@ -434,21 +478,45 @@
 <!-- MAIN -->
 <main class="page">
 
-  <!-- LOGO -->
-  <div class="logo-wrap">
-    <svg class="logo-mark" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="22" cy="22" r="19" stroke="#6B87FF" stroke-width="1.5" stroke-dasharray="72 28"/>
-      <circle cx="22" cy="22" r="12" stroke="#6B87FF" stroke-width="1" stroke-dasharray="46 18" opacity="0.5"/>
-      <text x="22" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#F7F6F3" font-family="serif">₥</text>
-    </svg>
-    <span class="logo-name"><span>M</span>UNDINERO</span>
+  <!-- WORDMARK -->
+  <div class="wordmark">
+    <span class="wordmark-name"><span>M</span>UNDINERO</span>
   </div>
 
-  <!-- HEADLINE -->
-  <div class="headline-wrap">
-    <p class="eyebrow">Próximamente</p>
-    <h1 class="headline">El futuro del<br>dinero <em>habla.</em></h1>
-    <p class="subheadline">Nosotros lo traducimos.</p>
+  <!-- EYEBROW -->
+  <p class="eyebrow" style="margin-bottom: 24px;">Próximamente</p>
+
+  <!-- HERO LOGO ANIMATED -->
+  <div class="hero-logo-wrap">
+    <svg class="mundinero-hero" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <defs>
+        <!-- Inner ring path (r=190, center 300,300, starts at top) -->
+        <path id="ring-path-inner" d="M 300,110 A 190,190 0 1,1 299.999,110"/>
+        <!-- Outer ring path (r=230, center 300,300, starts at top) -->
+        <path id="ring-path-outer" d="M 300,70 A 230,230 0 1,1 299.999,70"/>
+      </defs>
+
+      <!-- Static M mark -->
+      <image href="Mundinero.svg" x="100" y="50" width="400" height="500" preserveAspectRatio="xMidYMid meet"/>
+
+      <!-- Subtle static ring borders -->
+      <circle cx="300" cy="300" r="190" stroke="rgba(107,135,255,0.12)" stroke-width="0.75" fill="none"/>
+      <circle cx="300" cy="300" r="230" stroke="rgba(107,135,255,0.08)" stroke-width="0.75" fill="none"/>
+
+      <!-- Inner rotating ring: "El futuro del dinero habla." — 28s -->
+      <g class="ring-inner-group">
+        <text font-family="'Barlow Condensed',system-ui,sans-serif" font-size="12" font-weight="600" letter-spacing="3.5" fill="rgba(247,246,243,0.55)">
+          <textPath href="#ring-path-inner">EL FUTURO DEL DINERO HABLA. · EL FUTURO DEL DINERO HABLA. · EL FUTURO DEL DINERO HABLA. · EL FUTURO DEL DINERO HABLA. · EL FUTURO DEL DINERO HABLA. ·</textPath>
+        </text>
+      </g>
+
+      <!-- Outer rotating ring: "Nosotros Traducimos." — 48s -->
+      <g class="ring-outer-group">
+        <text font-family="'Barlow Condensed',system-ui,sans-serif" font-size="11.5" font-weight="500" letter-spacing="3" fill="rgba(107,135,255,0.65)">
+          <textPath href="#ring-path-outer">NOSOTROS TRADUCIMOS. · NOSOTROS TRADUCIMOS. · NOSOTROS TRADUCIMOS. · NOSOTROS TRADUCIMOS. · NOSOTROS TRADUCIMOS. · NOSOTROS TRADUCIMOS. · NOSOTROS TRADUCIMOS. · NOSOTROS TRADUCIMOS. ·</textPath>
+        </text>
+      </g>
+    </svg>
   </div>
 
   <!-- LAUNCH DATE -->
