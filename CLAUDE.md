@@ -22,8 +22,10 @@
 - Modo por defecto del sitio: dark (fondo tinta)
 
 ## Tipografía
-- Serif (titulares): Cormorant Garamond 700
-- Sans (UI/datos): Barlow Condensed 500-600
+- Serif (titulares/columna): Newsreader — Google Fonts (variable: --font-serif)
+- Sans (UI/cuerpo/etiquetas): IBM Plex Sans — Google Fonts (variable: --font-sans)
+- Mono (ticker/cifras/datos): IBM Plex Mono — Google Fonts (variable: --font-mono)
+- Logo: Canela Text (solo marca, no replicar en código)
 - Estilo: editorial flat, sin gradientes decorativos
 
 ## Stack

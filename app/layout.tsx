@@ -1,18 +1,27 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Barlow_Condensed } from "next/font/google";
+import { Newsreader, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+const newsreader = Newsreader({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
   style: ["normal", "italic"],
+  variable: "--font-serif",
+  display: "swap",
 });
 
-const barlow = Barlow_Condensed({
-  variable: "--font-barlow",
+const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "600"],
+  variable: "--font-mono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -28,7 +37,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${cormorant.variable} ${barlow.variable} dark`}
+      className={`${newsreader.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable} dark`}
     >
       <body className="bg-tinta text-crema min-h-screen antialiased font-sans">
         {children}

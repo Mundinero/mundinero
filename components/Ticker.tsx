@@ -34,12 +34,12 @@ export default function Ticker() {
               <span className="text-crema/50 text-[11px] font-semibold tracking-widest">
                 {item.label}
               </span>
-              <span className="text-crema text-[12px] font-semibold">
+              <span className="text-crema text-[12px] font-semibold font-mono">
                 {item.value}
               </span>
               {item.change !== null && item.up !== null && (
                 <span
-                  className={`text-[11px] font-semibold ${
+                  className={`text-[11px] font-semibold font-mono ${
                     item.up ? "text-positivo" : "text-negativo"
                   }`}
                 >
