@@ -1,11 +1,13 @@
 {
   "version": 2,
   "builds": [
-    {"src": "index.html",       "use": "@vercel/static"},
-    {"src": "MundineroIso.png", "use": "@vercel/static"}
+    {"src": "index.html",            "use": "@vercel/static"},
+    {"src": "MundineroIso.png",      "use": "@vercel/static"},
+    {"src": "Wallpapers/**",         "use": "@vercel/static"}
   ],
   "routes": [
-    {"src": "/MundineroIso.png", "dest": "/MundineroIso.png"},
-    {"src": "/(.*)",             "dest": "/index.html"}
+    {"src": "/MundineroIso.png",     "dest": "/MundineroIso.png"},
+    {"src": "/Wallpapers/(.*)",      "dest": "/Wallpapers/$1"},
+    {"src": "/(.*)",                 "dest": "/index.html"}
   ]
 }
