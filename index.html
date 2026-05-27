@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mundinero — Próximamente</title>
+  <meta name="description" content="El futuro del dinero habla. Nosotros lo traducimos. Lanzamiento 8 de junio 2026.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --tinta:      #1f1e1d;
+      --crema:      #F7F6F3;
+      --azul:       #6B87FF;
+      --azul-vivo:  #5170ff;
+      --verde:      #34D87F;
+      --rojo:       #FF6B6B;
+      --serif:      'Cormorant Garamond', Georgia, serif;
+      --sans:       'Barlow Condensed', system-ui, sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--tinta);
+      color: var(--crema);
+      font-family: var(--sans);
+      overflow-x: hidden;
+    }
+
+    /* ── GRAIN OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.035;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    /* ── BACKGROUND RADIAL ── */
+    .bg-glow {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(81,112,255,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 80% 80%, rgba(52,216,127,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* ── TICKER ── */
+    .ticker {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 32px;
+      background: rgba(31,30,29,0.95);
+      border-bottom: 1px solid rgba(247,246,243,0.06);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+    }
+    .ticker-label {
+      background: var(--azul-vivo);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      padding: 0 12px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      text-transform: uppercase;
+    }
+    .ticker-track {
+      display: flex;
+      animation: scroll-ticker 35s linear infinite;
+      white-space: nowrap;
+    }
+    .ti {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 0 24px;
+      letter-spacing: 0.04em;
+      color: rgba(247,246,243,0.6);
+    }
+    .ti b { color: var(--crema); font-weight: 600; margin: 0 4px; }
+    .up  { color: var(--verde); }
+    .dn  { color: var(--rojo); }
+    @keyframes scroll-ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 24px 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── LOGO ── */
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 64px;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards 0.2s;
+    }
+    .logo-mark {
+      width: 44px;
+      height: 44px;
+    }
+    .logo-name {
+      font-family: var(--serif);
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--crema);
+    }
+    .logo-name span { color: var(--azul); }
+
+    /* ── HEADLINE ── */
+    .headline-wrap {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--azul);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards 0.4s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .eyebrow::before, .eyebrow::after {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--azul);
+      opacity: 0.5;
+    }
+    .headline {
+      font-family: var(--serif);
+      font-size: clamp(48px, 8vw, 96px);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      color: var(--crema);
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards 0.5s;
+    }
+    .headline em {
+      font-style: italic;
+      color: var(--azul);
+    }
+    .subheadline {
+      font-family: var(--sans);
+      font-size: clamp(14px, 2vw, 18px);
+      font-weight: 400;
+      color: rgba(247,246,243,0.45);
+      letter-spacing: 0.04em;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards 0.65s;
+    }
+
+    /* ── LAUNCH DATE ── */
+    .launch-date {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(247,246,243,0.3);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards 0.75s;
+    }
+
+    /* ── COUNTDOWN ── */
+    .countdown {
+      display: flex;
+      gap: 2px;
+      margin-bottom: 64px;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards 0.8s;
+    }
+    .cd-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 100px;
+      padding: 20px 12px 16px;
+      background: rgba(247,246,243,0.03);
+      border: 0.5px solid rgba(247,246,243,0.07);
+      position: relative;
+    }
+    .cd-block:first-child { border-radius: 8px 0 0 8px; }
+    .cd-block:last-child  { border-radius: 0 8px 8px 0; }
+    .cd-num {
+      font-family: var(--serif);
+      font-size: clamp(48px, 8vw, 72px);
+      font-weight: 700;
+      line-height: 1;
+      color: var(--crema);
+      letter-spacing: -0.03em;
+      transition: color 0.15s;
+    }
+    .cd-block:hover .cd-num { color: var(--azul); }
+    .cd-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(247,246,243,0.3);
+      margin-top: 6px;
+    }
+    .cd-sep {
+      display: flex;
+      align-items: center;
+      padding: 0 4px;
+      padding-bottom: 24px;
+      font-family: var(--serif);
+      font-size: 36px;
+      color: rgba(247,246,243,0.15);
+      font-weight: 300;
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-wrap {
+      width: 100%;
+      max-width: 480px;
+      margin-bottom: 56px;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards 0.95s;
+    }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(247,246,243,0.3);
+      margin-bottom: 8px;
+    }
+    .progress-label span { color: var(--verde); }
+    .progress-track {
+      height: 2px;
+      background: rgba(247,246,243,0.08);
+      border-radius: 1px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--azul-vivo), var(--verde));
+      border-radius: 1px;
+      transition: width 1s ease;
+    }
+
+    /* ── NEWSLETTER ── */
+    .newsletter {
+      width: 100%;
+      max-width: 460px;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards 1.05s;
+    }
+    .nl-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(247,246,243,0.3);
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    .nl-form {
+      display: flex;
+      gap: 0;
+      border: 1px solid rgba(247,246,243,0.12);
+      border-radius: 6px;
+      overflow: hidden;
+      background: rgba(247,246,243,0.04);
+      transition: border-color 0.2s;
+    }
+    .nl-form:focus-within {
+      border-color: var(--azul);
+    }
+    .nl-input {
+      flex: 1;
+      padding: 14px 18px;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--crema);
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+    .nl-input::placeholder { color: rgba(247,246,243,0.25); }
+    .nl-btn {
+      padding: 14px 20px;
+      background: var(--azul-vivo);
+      border: none;
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .nl-btn:hover { background: #3a57e8; }
+    .nl-btn.done  { background: var(--verde); cursor: default; }
+    .nl-note {
+      font-size: 11px;
+      color: rgba(247,246,243,0.2);
+      text-align: center;
+      margin-top: 10px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(247,246,243,0.05);
+      background: rgba(31,30,29,0.8);
+      backdrop-filter: blur(12px);
+      z-index: 50;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards 1.2s;
+    }
+    .footer-by {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(247,246,243,0.25);
+    }
+    .footer-by span { color: rgba(247,246,243,0.5); }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-links a {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(247,246,243,0.25);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--azul); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .countdown { gap: 1px; }
+      .cd-block { min-width: 72px; padding: 16px 8px 12px; }
+      .cd-sep { font-size: 24px; }
+      .footer { flex-direction: column; gap: 8px; text-align: center; }
+      .footer-links { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-label">En vivo</div>
+  <div style="overflow:hidden;flex:1;">
+    <div class="ticker-track">
+      <span class="ti">USD/MXN <b>18.24</b> <span class="up">▲ +0.12%</span></span>
+      <span class="ti">BTC <b>$83,240</b> <span class="up">▲ +1.84%</span></span>
+      <span class="ti">ETH <b>$1,791</b> <span class="dn">▼ −0.42%</span></span>
+      <span class="ti">XRP <b>$2.07</b> <span class="dn">▼ −1.02%</span></span>
+      <span class="ti">SOL <b>$118.30</b> <span class="up">▲ +2.11%</span></span>
+      <span class="ti">ORO <b>$3,020</b> <span class="up">▲ +0.31%</span></span>
+      <span class="ti">WTI <b>$71.4</b> <span class="dn">▼ −0.8%</span></span>
+      <span class="ti">CETES <b>9.50%</b></span>
+      <span class="ti">INFLACIÓN MX <b>3.77%</b></span>
+      <span class="ti">REAL YIELD <b class="up">+5.73%</b></span>
+      <span class="ti">REMESAS 2026 <b>$26.1B USD</b> <span class="up">acum.</span></span>
+      <!-- duplicate para loop -->
+      <span class="ti">USD/MXN <b>18.24</b> <span class="up">▲ +0.12%</span></span>
+      <span class="ti">BTC <b>$83,240</b> <span class="up">▲ +1.84%</span></span>
+      <span class="ti">ETH <b>$1,791</b> <span class="dn">▼ −0.42%</span></span>
+      <span class="ti">XRP <b>$2.07</b> <span class="dn">▼ −1.02%</span></span>
+      <span class="ti">SOL <b>$118.30</b> <span class="up">▲ +2.11%</span></span>
+      <span class="ti">ORO <b>$3,020</b> <span class="up">▲ +0.31%</span></span>
+      <span class="ti">WTI <b>$71.4</b> <span class="dn">▼ −0.8%</span></span>
+      <span class="ti">CETES <b>9.50%</b></span>
+      <span class="ti">INFLACIÓN MX <b>3.77%</b></span>
+      <span class="ti">REAL YIELD <b class="up">+5.73%</b></span>
+      <span class="ti">REMESAS 2026 <b>$26.1B USD</b> <span class="up">acum.</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="page">
+
+  <!-- LOGO -->
+  <div class="logo-wrap">
+    <svg class="logo-mark" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="22" cy="22" r="19" stroke="#6B87FF" stroke-width="1.5" stroke-dasharray="72 28"/>
+      <circle cx="22" cy="22" r="12" stroke="#6B87FF" stroke-width="1" stroke-dasharray="46 18" opacity="0.5"/>
+      <text x="22" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#F7F6F3" font-family="serif">₥</text>
+    </svg>
+    <span class="logo-name"><span>M</span>UNDINERO</span>
+  </div>
+
+  <!-- HEADLINE -->
+  <div class="headline-wrap">
+    <p class="eyebrow">Próximamente</p>
+    <h1 class="headline">El futuro del<br>dinero <em>habla.</em></h1>
+    <p class="subheadline">Nosotros lo traducimos.</p>
+  </div>
+
+  <!-- LAUNCH DATE -->
+  <p class="launch-date" id="launch-label">Lanzamiento · 8 de junio, 2026</p>
+
+  <!-- COUNTDOWN -->
+  <div class="countdown">
+    <div class="cd-block">
+      <span class="cd-num" id="cd-d">00</span>
+      <span class="cd-label">Días</span>
+    </div>
+    <div class="cd-sep">·</div>
+    <div class="cd-block">
+      <span class="cd-num" id="cd-h">00</span>
+      <span class="cd-label">Horas</span>
+    </div>
+    <div class="cd-sep">·</div>
+    <div class="cd-block">
+      <span class="cd-num" id="cd-m">00</span>
+      <span class="cd-label">Min</span>
+    </div>
+    <div class="cd-sep">·</div>
+    <div class="cd-block">
+      <span class="cd-num" id="cd-s">00</span>
+      <span class="cd-label">Seg</span>
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Construcción en curso</span>
+      <span id="pct">0%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="prog-fill" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div class="newsletter">
+    <p class="nl-label">Sé el primero en entrar</p>
+    <div class="nl-form">
+      <input class="nl-input" type="email" placeholder="tu@correo.com" id="nl-email" autocomplete="email">
+      <button class="nl-btn" id="nl-btn" onclick="subscribe()">Notificarme</button>
+    </div>
+    <p class="nl-note">Sin spam · Gratis · Solo te avisamos cuando abramos</p>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-by">Por <span>Monexus</span> · Marca registrada IMPI</div>
+  <div class="footer-links">
+    <a href="https://instagram.com/mundinero" target="_blank">Instagram</a>
+    <a href="mailto:hola@mundinero.com">Contacto</a>
+  </div>
+</footer>
+
+<script>
+  // COUNTDOWN
+  const TARGET = new Date('2026-06-08T09:00:00-06:00');
+  // Fecha de inicio para la barra de progreso (cuando se puso el countdown)
+  const START  = new Date('2026-05-27T00:00:00-06:00');
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    const now  = new Date();
+    const diff = TARGET - now;
+
+    if (diff <= 0) {
+      document.getElementById('cd-d').textContent = '00';
+      document.getElementById('cd-h').textContent = '00';
+      document.getElementById('cd-m').textContent = '00';
+      document.getElementById('cd-s').textContent = '00';
+      document.getElementById('launch-label').textContent = '¡Mundinero está en vivo!';
+      document.getElementById('pct').textContent = '100%';
+      document.getElementById('prog-fill').style.width = '100%';
+      return;
+    }
+
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000)  / 60000);
+    const secs  = Math.floor((diff % 60000)    / 1000);
+
+    document.getElementById('cd-d').textContent = pad(days);
+    document.getElementById('cd-h').textContent = pad(hours);
+    document.getElementById('cd-m').textContent = pad(mins);
+    document.getElementById('cd-s').textContent = pad(secs);
+
+    // Progress bar — porcentaje del tiempo transcurrido
+    const total   = TARGET - START;
+    const elapsed = now - START;
+    const pct     = Math.min(100, Math.max(0, Math.round((elapsed / total) * 100)));
+    document.getElementById('pct').textContent = pct + '%';
+    document.getElementById('prog-fill').style.width = pct + '%';
+  }
+
+  tick();
+  setInterval(tick, 1000);
+
+  // SUBSCRIBE
+  function subscribe() {
+    const email = document.getElementById('nl-email').value.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      document.getElementById('nl-email').style.borderLeft = '2px solid #FF6B6B';
+      document.getElementById('nl-email').placeholder = 'Ingresa un correo válido';
+      return;
+    }
+    const btn = document.getElementById('nl-btn');
+    btn.textContent = '¡Listo!';
+    btn.classList.add('done');
+    document.getElementById('nl-email').disabled = true;
+    document.getElementById('nl-note').textContent = 'Te avisamos el 8 de junio. ¡Gracias!';
+    document.getElementById('nl-note').style.color = 'rgba(52,216,127,0.7)';
+  }
+
+  // Enter key en input
+  document.getElementById('nl-email').addEventListener('keydown', e => {
+    if (e.key === 'Enter') subscribe();
+  });
+</script>
+
+</body>
+</html>
