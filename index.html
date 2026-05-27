@@ -7,7 +7,7 @@
   <meta name="description" content="El futuro del dinero habla. Nosotros lo traducimos. Lanzamiento 8 de junio 2026.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;0,700;1,400;1,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -18,8 +18,9 @@
       --azul-vivo:  #5170ff;
       --verde:      #34D87F;
       --rojo:       #FF6B6B;
-      --serif:      'Cormorant Garamond', Georgia, serif;
-      --sans:       'Barlow Condensed', system-ui, sans-serif;
+      --serif:      'Newsreader', Georgia, serif;
+      --sans:       'IBM Plex Sans', system-ui, sans-serif;
+      --mono:       'IBM Plex Mono', ui-monospace, monospace;
     }
 
     html, body {
@@ -89,7 +90,8 @@
       letter-spacing: 0.04em;
       color: rgba(247,246,243,0.6);
     }
-    .ti b { color: var(--crema); font-weight: 600; margin: 0 4px; }
+    .ti b { color: var(--crema); font-weight: 600; margin: 0 4px; font-family: var(--mono); }
+    .ti .val { font-family: var(--mono); }
     .up  { color: var(--verde); }
     .dn  { color: var(--rojo); }
     @keyframes scroll-ticker {
