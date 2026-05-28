@@ -4,6 +4,7 @@
     {"src": "index.html",       "use": "@vercel/static"},
     {"src": "MundineroIso.png",  "use": "@vercel/static"},
     {"src": "mundineronav.jpg",  "use": "@vercel/static"},
+    {"src": "mundineronav.png",  "use": "@vercel/static"},
     {"src": "mun 2.png",         "use": "@vercel/static"},
     {"src": "mun 3.png",         "use": "@vercel/static"},
     {"src": "mun 4.png",         "use": "@vercel/static"},
@@ -12,6 +13,7 @@
   "routes": [
     {"src": "/MundineroIso.png",   "dest": "/MundineroIso.png"},
     {"src": "/mundineronav.jpg",   "dest": "/mundineronav.jpg"},
+    {"src": "/mundineronav.png",   "dest": "/mundineronav.png"},
     {"src": "/mun%202.png",        "dest": "/mun 2.png"},
     {"src": "/mun%203.png",        "dest": "/mun 3.png"},
     {"src": "/mun%204.png",        "dest": "/mun 4.png"},
