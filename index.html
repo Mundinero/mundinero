@@ -90,22 +90,22 @@
     .ticker {
       position: fixed;
       top: 0; left: 0; right: 0;
-      height: 32px;
-      background: rgba(31,30,29,0.92);
+      height: 45px;
+      background: rgba(31,30,29,0.62);
       border-bottom: 1px solid rgba(247,246,243,0.07);
       overflow: hidden;
       display: flex;
       align-items: center;
       z-index: 100;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(14px);
     }
     .ticker-label {
       background: var(--azul-vivo);
       color: #fff;
-      font-size: 9px;
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.15em;
-      padding: 0 12px;
+      padding: 0 16px;
       height: 100%;
       display: flex;
       align-items: center;
@@ -121,19 +121,19 @@
     .ti {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      font-size: 11px;
+      gap: 5px;
+      font-size: 15px;
       font-weight: 500;
-      padding: 0 22px;
+      padding: 0 28px;
       letter-spacing: 0.04em;
       color: rgba(247,246,243,0.5);
     }
     .ti .asset { color: rgba(247,246,243,0.5); }
     .ti .val   { color: var(--crema); font-weight: 600; font-family: var(--mono); }
-    .ti .chg   { font-family: var(--mono); font-size: 10px; }
+    .ti .chg   { font-family: var(--mono); font-size: 13px; }
     .ti .up    { color: var(--verde); }
     .ti .dn    { color: var(--rojo); }
-    .ti .note  { color: var(--verde); font-family: var(--mono); font-size: 10px; }
+    .ti .note  { color: var(--verde); font-family: var(--mono); font-size: 13px; }
     @keyframes scroll-ticker {
       from { transform: translateX(0); }
       to   { transform: translateX(-50%); }
@@ -146,7 +146,7 @@
       height: 100vh;
       display: flex;
       flex-direction: column;
-      padding-top: 32px;
+      padding-top: 45px;
       overflow: hidden;
     }
 
@@ -183,7 +183,8 @@
       flex-shrink: 0;
     }
     .tl {
-      font-family: var(--sans);
+      font-family: var(--serif);
+      font-style: italic;
       font-size: clamp(14px, 2vw, 28px);
       font-weight: 400;
       color: var(--crema);
@@ -204,6 +205,8 @@
       max-width: 1280px;
       height: auto;
       display: block;
+      filter: drop-shadow(0 0 22px rgba(247,246,243,0.16))
+              drop-shadow(0 0 54px rgba(247,246,243,0.07));
     }
 
     /* ── BOTTOM ── */
@@ -222,7 +225,7 @@
       font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(247,246,243,0.32);
+      color: var(--crema);
     }
 
     /* ── COUNTDOWN ── */
@@ -250,6 +253,10 @@
       color: var(--crema);
       letter-spacing: -0.03em;
       transition: color 0.15s;
+      text-shadow:
+        0 0 26px rgba(247,246,243,0.26),
+        0 0 52px rgba(107,135,255,0.13),
+        0 0 84px rgba(107,135,255,0.06);
     }
     .cd-block:hover .cd-num { color: var(--azul); }
     .cd-label {
@@ -390,14 +397,16 @@
 
     /* ── MOBILE: zero scroll ── */
     @media (max-width: 700px) {
-      .hero { padding: 16px 20px 12px; }
-      .bottom { padding: 0 16px 56px; gap: 14px; }
+      .page { padding-top: 45px; }
+      .hero { padding: 12px 18px 8px; }
+      .bottom { padding: 0 16px 96px; gap: 10px; }
       .tl { font-size: clamp(12px, 3.6vw, 18px); }
       .cd-block { min-width: 68px; padding: 10px 6px 8px; }
       .cd-num { font-size: clamp(28px, 7vw, 44px); }
       .cd-sep { font-size: 18px; }
       .footer { padding: 10px 16px; }
       .footer-by { font-size: 9px; }
+      .photo-credit { bottom: 60px; font-size: 8px; }
     }
     @media (max-width: 400px) {
       .tl { font-size: 11px; }
