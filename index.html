@@ -86,6 +86,7 @@
       opacity: 0;
       transition: opacity 1.5s ease-in-out;
     }
+    .photo-credit b { color: rgba(247,246,243,0.85); font-weight: 600; }
 
     /* ── TICKER ── */
     .ticker {
@@ -541,17 +542,24 @@ const WALLPAPERS = [
 // Preload all images at startup
 WALLPAPERS.forEach(src => { const img = new Image(); img.src = src; });
 
-function getCredit(filepath) {
-  return filepath.split('/').pop().replace(/\.[^.]+$/, '');
+function parseCredit(filepath) {
+  const base = filepath.split('/').pop().replace(/\.[^.]+$/, '');
+  const parts = base.split('_');
+  if (parts.length < 3) return null;
+  const photographer = parts[0];
+  const country      = parts[parts.length - 1];
+  const region       = parts.slice(1, -1).join(', ');
+  return { photographer, location: region + ', ' + country };
 }
 
 const creditEl = document.getElementById('photo-credit');
 
-function renderCredit(text) {
+function renderCredit(credit) {
   creditEl.style.opacity = '0';
   setTimeout(() => {
-    creditEl.textContent = text || '';
-    if (text) creditEl.style.opacity = '1';
+    if (!credit) { creditEl.innerHTML = ''; return; }
+    creditEl.innerHTML = `<b>${credit.photographer}</b><br>${credit.location}`;
+    creditEl.style.opacity = '1';
   }, 150);
 }
 
@@ -560,13 +568,13 @@ let activeEl   = document.getElementById('wall-a');
 let inactiveEl = document.getElementById('wall-b');
 
 function loadWallpaper(idx) {
-  const src  = WALLPAPERS[idx];
-  const text = getCredit(src);
+  const src    = WALLPAPERS[idx];
+  const credit = parseCredit(src);
   inactiveEl.style.backgroundImage = `url('${src}')`;
   setTimeout(() => {
     activeEl.classList.remove('active');
     inactiveEl.classList.add('active');
-    renderCredit(text);
+    renderCredit(credit);
     [activeEl, inactiveEl] = [inactiveEl, activeEl];
   }, 50);
 }
