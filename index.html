@@ -59,15 +59,29 @@
       transition: opacity 1.5s ease-in-out;
     }
     .wall-slide.active { opacity: 1; }
-    .wall-overlay {
+    .wall-overlay-top {
       position: absolute;
       inset: 0;
       background: linear-gradient(
         to bottom,
-        rgba(31,30,29,0.5)  0%,
-        rgba(31,30,29,0.25) 50%,
-        rgba(31,30,29,0.55) 100%
+        rgba(31,30,29,0.75) 0%,
+        rgba(31,30,29,0.0)  25%
       );
+    }
+    .wall-overlay-bottom {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(31,30,29,0.92) 0%,
+        rgba(31,30,29,0.7)  30%,
+        rgba(31,30,29,0.0)  60%
+      );
+    }
+    .wall-overlay-center {
+      position: absolute;
+      inset: 0;
+      background: rgba(31,30,29,0.08);
     }
 
     /* ── PHOTO CREDIT ── */
@@ -77,8 +91,8 @@
       right: 16px;
       z-index: 40;
       text-align: right;
-      font-size: 11px;
-      color: rgba(247,246,243,0.6);
+      font-size: 12px;
+      color: rgba(247,246,243,0.75);
       font-family: 'IBM Plex Sans', system-ui, sans-serif;
       line-height: 1.5;
       letter-spacing: 0.03em;
@@ -157,50 +171,30 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
+      align-items: center;
       padding: 24px 40px 20px;
       min-height: 0;
-    }
-
-    /* ── CORNER TEXT ── always left/right, never stack ── */
-    .hero-top {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-start;
-      width: 100%;
-      gap: 20px;
-    }
-    .tagline-left {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-    }
-    .tagline-right {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 1px;
-      text-align: right;
-      flex-shrink: 0;
-    }
-    .tl {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: clamp(14px, 2vw, 28px);
-      font-weight: 400;
-      color: var(--crema);
-      line-height: 1.15;
-      letter-spacing: 0.01em;
     }
 
     /* ── LOGO ── */
     .logo-area {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       padding: 0 8px;
       flex-shrink: 0;
+      width: 100%;
+    }
+    .tagline-center {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 18px;
+      color: rgba(247,246,243,0.75);
+      letter-spacing: 0.08em;
+      text-align: center;
+      margin-top: -8px;
     }
     @keyframes logo-pulse {
       0%, 100% {
@@ -250,13 +244,12 @@
       flex-direction: column;
       align-items: center;
       min-width: 88px;
-      padding: 14px 10px 10px;
-      background: rgba(247,246,243,0.04);
-      border: 0.5px solid rgba(247,246,243,0.08);
-      backdrop-filter: blur(6px);
+      padding: 12px 20px;
+      background: rgba(31,30,29,0.45);
+      border: 0.5px solid rgba(247,246,243,0.1);
+      border-radius: 8px;
+      backdrop-filter: blur(8px);
     }
-    .cd-block:first-child { border-radius: 7px 0 0 7px; }
-    .cd-block:last-child  { border-radius: 0 7px 7px 0; }
     .cd-num {
       font-family: var(--serif);
       font-size: clamp(36px, 4.5vw, 60px);
@@ -289,31 +282,37 @@
       color: rgba(247,246,243,0.12);
     }
 
-    /* ── PROGRESS ── */
-    .progress-wrap { width: 100%; max-width: 400px; }
-    .progress-label {
+    /* ── STATUS ── */
+    .status-row {
       display: flex;
-      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    .status-text {
       font-size: 10px;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(247,246,243,0.24);
-      margin-bottom: 6px;
+      color: rgba(247,246,243,0.28);
     }
-    .progress-label span { color: var(--verde); }
-    .progress-track {
-      height: 2px;
-      background: rgba(247,246,243,0.07);
-      border-radius: 1px;
-      overflow: hidden;
+    .status-dots {
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--azul-vivo), var(--verde));
-      border-radius: 1px;
-      transition: width 1s ease;
+    @keyframes dot-pulse {
+      0%, 80%, 100% { opacity: 0.25; transform: scale(0.75); }
+      40%           { opacity: 1;    transform: scale(1); }
     }
+    .status-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--azul);
+      animation: dot-pulse 1.4s ease-in-out infinite;
+    }
+    .status-dot:nth-child(2) { animation-delay: 0.2s; }
+    .status-dot:nth-child(3) { animation-delay: 0.4s; }
 
     /* ── NEWSLETTER ── */
     .newsletter { width: 100%; max-width: 400px; }
@@ -331,8 +330,8 @@
       border: 1px solid rgba(247,246,243,0.11);
       border-radius: 7px;
       overflow: hidden;
-      background: rgba(247,246,243,0.04);
-      backdrop-filter: blur(8px);
+      background: rgba(31,30,29,0.4);
+      backdrop-filter: blur(12px);
       transition: border-color 0.2s;
     }
     .nl-form:focus-within { border-color: rgba(107,135,255,0.5); }
@@ -433,7 +432,9 @@
 <div class="bg-wall">
   <div class="wall-slide" id="wall-a"></div>
   <div class="wall-slide" id="wall-b"></div>
-  <div class="wall-overlay"></div>
+  <div class="wall-overlay-top"></div>
+  <div class="wall-overlay-bottom"></div>
+  <div class="wall-overlay-center"></div>
 </div>
 
 <!-- PHOTO CREDIT -->
@@ -453,20 +454,9 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-top">
-      <div class="tagline-left">
-        <span class="tl">El futuro</span>
-        <span class="tl">del dinero</span>
-        <span class="tl">habla...</span>
-      </div>
-      <div class="tagline-right">
-        <span class="tl">...nosotros</span>
-        <span class="tl">traducimos.</span>
-      </div>
-    </div>
-
     <div class="logo-area">
       <img class="logo-full" src="MundineroIso.png" alt="Mundinero">
+      <p class="tagline-center">El futuro del dinero habla. Nosotros traducimos.</p>
     </div>
   </section>
 
@@ -484,14 +474,13 @@
       <div class="cd-block"><span class="cd-num" id="cd-s">00</span><span class="cd-label">Seg</span></div>
     </div>
 
-    <div class="progress-wrap">
-      <div class="progress-label">
-        <span>Construcción en curso</span>
-        <span id="pct">0%</span>
-      </div>
-      <div class="progress-track">
-        <div class="progress-fill" id="prog-fill" style="width:0%"></div>
-      </div>
+    <div class="status-row">
+      <span class="status-text">Redacción · Diseño · Tecnología</span>
+      <span class="status-dots">
+        <span class="status-dot"></span>
+        <span class="status-dot"></span>
+        <span class="status-dot"></span>
+      </span>
     </div>
 
     <div class="newsletter">
@@ -689,17 +678,12 @@ function tick() {
   if (diff <= 0) {
     ['cd-d','cd-h','cd-m','cd-s'].forEach(id => document.getElementById(id).textContent = '00');
     document.getElementById('launch-label').textContent = '¡Mundinero está en vivo!';
-    document.getElementById('pct').textContent = '100%';
-    document.getElementById('prog-fill').style.width = '100%';
     return;
   }
   document.getElementById('cd-d').textContent = pad(Math.floor(diff / 86400000));
   document.getElementById('cd-h').textContent = pad(Math.floor((diff % 86400000) / 3600000));
   document.getElementById('cd-m').textContent = pad(Math.floor((diff % 3600000) / 60000));
   document.getElementById('cd-s').textContent = pad(Math.floor((diff % 60000) / 1000));
-  const pct = Math.min(100, Math.max(0, Math.round(((now - START) / (TARGET - START)) * 100)));
-  document.getElementById('pct').textContent = pct + '%';
-  document.getElementById('prog-fill').style.width = pct + '%';
 }
 tick();
 setInterval(tick, 1000);
