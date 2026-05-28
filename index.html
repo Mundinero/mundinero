@@ -84,23 +84,8 @@
       background: rgba(31,30,29,0.28);
     }
 
-    /* ── PHOTO CREDIT ── */
-    .photo-credit {
-      position: fixed;
-      bottom: 52px;
-      right: 16px;
-      z-index: 40;
-      text-align: right;
-      font-size: 12px;
-      color: rgba(247,246,243,0.75);
-      font-family: 'IBM Plex Sans', system-ui, sans-serif;
-      line-height: 1.5;
-      letter-spacing: 0.03em;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 1.5s ease-in-out;
-    }
-    .photo-credit b { color: rgba(247,246,243,0.85); font-weight: 600; }
+    /* ── PHOTO CREDIT (in footer) ── */
+    #photo-credit b { color: rgba(247,246,243,0.65); font-weight: 600; }
 
     /* ── TICKER ── */
     .ticker {
@@ -412,7 +397,6 @@
       .cd-block { min-width: 60px; padding: 12px 8px 10px; }
       .cd-sep { font-size: 20px; }
       .newsletter { margin: 0 16px; width: calc(100% - 32px); }
-      .photo-credit { bottom: 56px; font-size: 11px; }
     }
   </style>
 </head>
@@ -426,9 +410,6 @@
   <div class="wall-overlay-bottom"></div>
   <div class="wall-overlay-center"></div>
 </div>
-
-<!-- PHOTO CREDIT -->
-<div class="photo-credit" id="photo-credit"></div>
 
 <!-- TICKER -->
 <div class="ticker">
@@ -487,6 +468,7 @@
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-by">Por Monexus S.A.S. de C.V. · Marca registrada IMPI</div>
+  <div id="photo-credit" style="font-size:11px;color:rgba(247,246,243,0.45);text-align:center;flex:1;transition:opacity 0.8s ease;"></div>
   <div class="footer-contact">
     <span class="footer-contact-label">Contacto</span>
     <a class="footer-icon-link" href="https://instagram.com/mundinero" target="_blank" rel="noopener" aria-label="Instagram">
@@ -535,9 +517,9 @@ function renderCredit(credit) {
   creditEl.style.opacity = '0';
   setTimeout(() => {
     if (!credit) { creditEl.innerHTML = ''; return; }
-    creditEl.innerHTML = `<b>${credit.photographer}</b><br>${credit.location}`;
+    creditEl.innerHTML = `<b>${credit.photographer}</b> · ${credit.location}`;
     creditEl.style.opacity = '1';
-  }, 150);
+  }, 200);
 }
 
 let wallIdx    = 0;
@@ -569,19 +551,19 @@ setInterval(() => {
 /* ═══════════════════════════════════════
    TICKER — live prices
 ═══════════════════════════════════════ */
-// Static fallbacks (updated when live data arrives)
+// Fallbacks con datos reales (se actualizan con fetchPrices)
 let tickerState = [
-  { label: 'USD/MXN', val: '—',       chg: null,      up: null },
-  { label: 'BTC',     val: '—',       chg: null,      up: null },
-  { label: 'ETH',     val: '—',       chg: null,      up: null },
-  { label: 'XRP',     val: '—',       chg: null,      up: null },
-  { label: 'SOL',     val: '—',       chg: null,      up: null },
-  { label: 'ORO',     val: '$3,020',  chg: '+0.31%',  up: true  },
-  { label: 'WTI',     val: '$71.4',   chg: '−0.8%',   up: false },
-  { label: 'CETES',   val: '9.50%',   chg: null,      up: null  },
-  { label: 'INFLACIÓN MX', val: '3.77%', chg: null,   up: null  },
-  { label: 'REAL YIELD',   val: '+5.73%', chg: null,  up: true  },
-  { label: 'REMESAS 2026', val: '$26.1B USD', note: 'acum.', chg: null, up: null },
+  { label: 'USD/MXN',      val: '17.29',      chg: '+0.12%', up: true  },
+  { label: 'BTC',          val: '$74,086',     chg: '-2.24%', up: false },
+  { label: 'ETH',          val: '$2,011',      chg: '-3.06%', up: false },
+  { label: 'XRP',          val: '$1.30',       chg: '-1.93%', up: false },
+  { label: 'SOL',          val: '$82.00',      chg: '-1.89%', up: false },
+  { label: 'ORO',          val: '$3,020',      chg: '+0.31%', up: true  },
+  { label: 'WTI',          val: '$71.4',       chg: '-0.8%',  up: false },
+  { label: 'CETES',        val: '9.50%',       chg: null,     up: true  },
+  { label: 'INFLACIÓN MX', val: '3.77%',       chg: null,     up: false },
+  { label: 'REAL YIELD',   val: '+5.73%',      chg: null,     up: true  },
+  { label: 'REMESAS 2026', val: '$26.1B USD',  note: 'acum.', chg: null, up: true },
 ];
 
 function fmtCrypto(n) {
