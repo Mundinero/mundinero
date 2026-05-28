@@ -6,6 +6,7 @@ const INDEX_PATH     = 'index.html';
 
 const files = fs.readdirSync(WALLPAPERS_DIR)
   .filter(f => /\.(jpg|jpeg|png|webp)$/i.test(f))
+  .map(f => f.normalize('NFC'))
   .sort();
 
 const entries = files.map(file => {
