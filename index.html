@@ -87,32 +87,85 @@
     /* ── PHOTO CREDIT (in footer) ── */
     #photo-credit b { color: rgba(247,246,243,0.65); font-weight: 600; }
 
-    /* ── TICKER ── */
+    /* ── TICKER — Liquid Glass ── */
     .ticker {
       position: fixed;
-      top: 12px;
-      left: 16px;
-      right: 16px;
-      height: 38px;
+      top: 10px;
+      left: 14px;
+      right: 14px;
+      height: 36px;
       border-radius: 999px;
-      background: rgba(18,17,16,0.55);
-      backdrop-filter: blur(24px) saturate(180%) brightness(0.9);
-      -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(0.9);
-      border: 0.5px solid rgba(247,246,243,0.1);
+
+      background: rgba(10,10,12,0.45);
+      backdrop-filter: blur(28px) saturate(200%) brightness(1.05);
+      -webkit-backdrop-filter: blur(28px) saturate(200%) brightness(1.05);
+      background-clip: padding-box;
+
+      border: 1px solid transparent;
       box-shadow:
-        0 4px 24px rgba(0,0,0,0.35),
-        0 1px 0px rgba(247,246,243,0.06) inset,
-        0 -1px 0px rgba(0,0,0,0.2) inset;
+        0 2px 32px rgba(0,0,0,0.4),
+        0 1px 0 rgba(255,255,255,0.12) inset,
+        0 -1px 0 rgba(0,0,0,0.25) inset,
+        0 0 0 0.5px rgba(255,255,255,0.08);
+
+      filter: url(#liquid-glass);
       overflow: hidden;
       display: flex;
       align-items: center;
       z-index: 100;
     }
-    .ticker-inner { overflow: hidden; flex: 1; }
+    /* Borde iridiscente */
+    .ticker::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 999px;
+      padding: 1px;
+      background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.25) 0%,
+        rgba(255,255,255,0.05) 30%,
+        rgba(107,135,255,0.15) 60%,
+        rgba(52,216,127,0.10) 80%,
+        rgba(255,255,255,0.20) 100%
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box,
+                    linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    /* Reflejo de luz superior */
+    .ticker::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255,255,255,0.35) 30%,
+        rgba(255,255,255,0.50) 50%,
+        rgba(255,255,255,0.35) 70%,
+        transparent 100%
+      );
+      border-radius: 999px;
+      pointer-events: none;
+    }
+    .ticker-inner {
+      overflow: hidden;
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
     .ticker-track {
       display: flex;
       white-space: nowrap;
       animation: scroll-ticker 45s linear infinite;
+      position: relative;
+      z-index: 1;
     }
     .ti {
       display: inline-flex;
@@ -430,6 +483,20 @@
     }
   </style>
 </head>
+<!-- SVG Liquid Glass filter (hidden) -->
+<svg style="position:absolute;width:0;height:0;" aria-hidden="true">
+  <defs>
+    <filter id="liquid-glass" x="-10%" y="-10%" width="120%" height="120%"
+            color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.008"
+        numOctaves="3" seed="2" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.5"
+        xChannelSelector="R" yChannelSelector="G" result="displaced"/>
+      <feGaussianBlur in="displaced" stdDeviation="0.4" result="blurred"/>
+      <feComposite in="blurred" in2="SourceGraphic" operator="atop"/>
+    </filter>
+  </defs>
+</svg>
 <body>
 
 <!-- WALLPAPER (2 slides for cross-fade) -->
