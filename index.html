@@ -167,17 +167,42 @@
       padding: 0 8px;
       flex-shrink: 0;
       width: 100%;
-      margin-top: 72px;
+      margin-top: 48px;
+      gap: 20px;
     }
-    .tagline-center {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 27px;
-      color: rgba(247,246,243,0.75);
-      letter-spacing: 0.08em;
-      text-align: center;
-      margin-top: 20px;
+    /* ── BRAND SEAL ── */
+    .brand-seal {
+      position: relative;
+      width: clamp(180px, 26vw, 340px);
+      height: clamp(180px, 26vw, 340px);
+      flex-shrink: 0;
     }
+    .brand-seal img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    @keyframes spin-cw {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    @keyframes seal-glow {
+      0%, 100% {
+        filter: drop-shadow(0 0 16px rgba(247,246,243,0.20))
+                drop-shadow(0 0 44px rgba(247,246,243,0.09));
+      }
+      50% {
+        filter: drop-shadow(0 0 36px rgba(247,246,243,0.42))
+                drop-shadow(0 0 80px rgba(247,246,243,0.18))
+                drop-shadow(0 0 130px rgba(107,135,255,0.14));
+      }
+    }
+    .seal-center { animation: seal-glow 5s ease-in-out infinite; }
+    .seal-ring-3 { opacity: 0.55; animation: spin-cw 22s linear infinite; }
+    .seal-ring-4 { opacity: 0.42; animation: spin-cw 38s linear infinite; }
+
     @keyframes logo-pulse {
       0%, 100% {
         filter: drop-shadow(0 0 20px rgba(247,246,243,0.14))
@@ -390,8 +415,9 @@
 
     /* ── MOBILE ── */
     @media (max-width: 768px) {
-      .logo-area { padding: 0 12px; }
-      .logo-full { max-height: clamp(48px, 13vw, 72px); width: auto; max-width: 100%; }
+      .logo-area { padding: 0 12px; gap: 14px; margin-top: 24px; }
+      .brand-seal { width: clamp(160px, 52vw, 260px); height: clamp(160px, 52vw, 260px); }
+      .logo-full { max-height: clamp(36px, 10vw, 56px); width: auto; max-width: 100%; }
       .tagline-center { font-size: 15px; padding: 0 20px; }
       .cd-num { font-size: 36px; }
       .cd-block { min-width: 60px; padding: 12px 8px 10px; }
@@ -425,8 +451,12 @@
   <!-- HERO -->
   <section class="hero">
     <div class="logo-area">
+      <div class="brand-seal">
+        <img class="seal-ring seal-ring-4" src="mun 4.png" alt="">
+        <img class="seal-ring seal-ring-3" src="mun 3.png" alt="">
+        <img class="seal-center" src="mun 2.png" alt="Mundinero">
+      </div>
       <img class="logo-full" src="MundineroIso.png" alt="Mundinero">
-      <p class="tagline-center">El futuro del dinero habla. Nosotros traducimos.</p>
     </div>
   </section>
 
