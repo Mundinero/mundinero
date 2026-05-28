@@ -497,7 +497,7 @@
       .cd-sep { font-size: 20px; }
       .newsletter { margin: 0 16px; width: calc(100% - 32px); }
       #photo-credit { display: none; }
-      .ticker-track { animation-duration: 23s; }
+      .ticker-track { animation-duration: 18s; }
     }
   </style>
 </head>
@@ -720,19 +720,24 @@ function renderTicker(items) {
 }
 
 async function fetchPrices() {
-  const [cgResult, fxResult] = await Promise.allSettled([
-    fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,ripple,solana&vs_currencies=usd&include_24hr_change=true&precision=4'),
+  const syms = encodeURIComponent(JSON.stringify(['BTCUSDT','ETHUSDT','XRPUSDT','SOLUSDT']));
+  const [binResult, fxResult] = await Promise.allSettled([
+    fetch(`https://api.binance.com/api/v3/ticker/24hr?symbols=${syms}`),
     fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.min.json')
   ]);
 
-  if (cgResult.status === 'fulfilled' && cgResult.value.ok) {
-    const cg = await cgResult.value.json();
-    const map = { BTC: 'bitcoin', ETH: 'ethereum', XRP: 'ripple', SOL: 'solana' };
-    tickerState = tickerState.map(it => {
-      const id = map[it.label];
-      if (!id || !cg[id]) return it;
-      const { str, up } = fmtChg(cg[id].usd_24h_change);
-      return { ...it, val: fmtCrypto(cg[id].usd), chg: str, up };
+  if (binResult.status === 'fulfilled' && binResult.value.ok) {
+    const data = await binResult.value.json();
+    const labelMap = { BTCUSDT: 'BTC', ETHUSDT: 'ETH', XRPUSDT: 'XRP', SOLUSDT: 'SOL' };
+    data.forEach(item => {
+      const label = labelMap[item.symbol];
+      if (!label) return;
+      const price  = parseFloat(item.lastPrice);
+      const chgPct = parseFloat(item.priceChangePercent);
+      const { str, up } = fmtChg(chgPct);
+      tickerState = tickerState.map(it =>
+        it.label === label ? { ...it, val: fmtCrypto(price), chg: str, up } : it
+      );
     });
   }
 
