@@ -614,24 +614,16 @@
    WALLPAPERS + PHOTO CREDITS
 ═══════════════════════════════════════ */
 const WALLPAPERS = [
-  'Wallpapers/Pedro Lastra_San Pedro Cholula_México.jpg',
-  'Wallpapers/Oscar Reygo_Santa Fe_México.jpg',
-  'Wallpapers/Bastien Nvs_Montmartre, París_Francia.jpg',
-  'Wallpapers/Santa Barbara_Padar_Indonesia.jpg',
+  { src: 'Wallpapers/Bastien Nvs_Montmartre, París_Francia.jpg', credit: 'Bastien Nvs · Montmartre, París, Francia' },
+  { src: 'Wallpapers/Julio López_CDMX_México.jpg', credit: 'Julio López · CDMX, México' },
+  { src: 'Wallpapers/Oscar Reygo_Santa Fe_México.jpg', credit: 'Oscar Reygo · Santa Fe, México' },
+  { src: 'Wallpapers/Pedro Lastra_San Pedro Cholula_México.jpg', credit: 'Pedro Lastra · San Pedro Cholula, México' },
+  { src: 'Wallpapers/Robb Miller_Manhattan, NY_EUA.jpg', credit: 'Robb Miller · Manhattan, NY, EUA' },
+  { src: 'Wallpapers/Santa Barbara_Padar_Indonesia.jpg', credit: 'Santa Barbara · Padar, Indonesia' },
 ];
 
 // Preload all images at startup
-WALLPAPERS.forEach(src => { const img = new Image(); img.src = src; });
-
-function parseCredit(filepath) {
-  const base = filepath.split('/').pop().replace(/\.[^.]+$/, '');
-  const parts = base.split('_');
-  if (parts.length < 3) return null;
-  const photographer = parts[0];
-  const country      = parts[parts.length - 1];
-  const region       = parts.slice(1, -1).join(', ');
-  return { photographer, location: region + ', ' + country };
-}
+WALLPAPERS.forEach(w => { const img = new Image(); img.src = w.src; });
 
 const creditEl = document.getElementById('photo-credit');
 
@@ -639,7 +631,10 @@ function renderCredit(credit) {
   creditEl.style.opacity = '0';
   setTimeout(() => {
     if (!credit) { creditEl.innerHTML = ''; return; }
-    creditEl.innerHTML = `<b>${credit.photographer}</b> · ${credit.location}`;
+    const dot = credit.indexOf(' · ');
+    const author = dot === -1 ? credit : credit.slice(0, dot);
+    const place  = dot === -1 ? ''     : credit.slice(dot);
+    creditEl.innerHTML = `<b>${author}</b>${place}`;
     creditEl.style.opacity = '1';
   }, 200);
 }
@@ -649,8 +644,7 @@ let activeEl   = document.getElementById('wall-a');
 let inactiveEl = document.getElementById('wall-b');
 
 function loadWallpaper(idx) {
-  const src    = WALLPAPERS[idx];
-  const credit = parseCredit(src);
+  const { src, credit } = WALLPAPERS[idx];
   inactiveEl.style.backgroundImage = `url('${src}')`;
   setTimeout(() => {
     activeEl.classList.remove('active');

@@ -25,12 +25,15 @@ jobs:
           BANXICO_TOKEN: ${{ secrets.BANXICO_TOKEN }}
           INEGI_TOKEN: ${{ secrets.INEGI_TOKEN }}
 
+      - name: Actualizar wallpapers desde carpeta /Wallpapers/
+        run: node scripts/generate-wallpapers.js
+
       - name: Commit y push si hubo cambios
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git diff --quiet index.html || (
             git add index.html &&
-            git commit -m "chore: datos ticker $(date +'%Y-%m-%d %H:%M UTC')" &&
+            git commit -m "chore: ticker + wallpapers $(date +'%Y-%m-%d %H:%M UTC')" &&
             git push
           )
