@@ -87,8 +87,8 @@
     /* ── PHOTO CREDIT (fixed) ── */
     #photo-credit {
       position: fixed;
-      bottom: 80px;
-      right: 16px;
+      bottom: 52px;
+      right: 14px;
       left: auto;
       text-align: right;
       z-index: 10;
@@ -99,6 +99,7 @@
       max-width: 160px;
       transition: opacity 0.8s ease;
       font-family: var(--sans);
+      white-space: nowrap;
     }
     #photo-credit b { color: rgba(247,246,243,0.65); font-weight: 600; }
 
@@ -262,13 +263,13 @@
     }
     @keyframes seal-glow {
       0%, 100% {
-        filter: drop-shadow(0 0 16px rgba(247,246,243,0.20))
-                drop-shadow(0 0 44px rgba(247,246,243,0.09));
+        filter: drop-shadow(0 0 20px rgba(247,246,243,0.28))
+                drop-shadow(0 0 50px rgba(247,246,243,0.12));
       }
       50% {
-        filter: drop-shadow(0 0 36px rgba(247,246,243,0.42))
-                drop-shadow(0 0 80px rgba(247,246,243,0.18))
-                drop-shadow(0 0 130px rgba(107,135,255,0.14));
+        filter: drop-shadow(0 0 48px rgba(247,246,243,0.58))
+                drop-shadow(0 0 100px rgba(247,246,243,0.26))
+                drop-shadow(0 0 160px rgba(107,135,255,0.22));
       }
     }
     .seal-center { animation: seal-glow 5s ease-in-out infinite; }
@@ -277,20 +278,21 @@
 
     @keyframes logo-pulse {
       0%, 100% {
-        filter: drop-shadow(0 0 20px rgba(247,246,243,0.14))
-                drop-shadow(0 0 48px rgba(247,246,243,0.06));
+        filter: drop-shadow(0 0 24px rgba(247,246,243,0.22))
+                drop-shadow(0 0 60px rgba(247,246,243,0.10));
       }
       50% {
-        filter: drop-shadow(0 0 44px rgba(247,246,243,0.34))
-                drop-shadow(0 0 90px rgba(247,246,243,0.16))
-                drop-shadow(0 0 150px rgba(107,135,255,0.10));
+        filter: drop-shadow(0 0 56px rgba(247,246,243,0.48))
+                drop-shadow(0 0 110px rgba(247,246,243,0.22))
+                drop-shadow(0 0 180px rgba(107,135,255,0.18));
       }
     }
     .logo-full {
       width: 100%;
-      max-width: clamp(100px, 14vw, 180px);
+      max-width: clamp(150px, 21vw, 270px);
       height: auto;
       display: block;
+      margin-top: 12px;
       animation: logo-pulse 5s ease-in-out infinite;
     }
 
@@ -489,12 +491,13 @@
     @media (max-width: 768px) {
       .logo-area { padding: 0 12px; gap: 14px; margin-top: 24px; }
       .brand-seal { width: clamp(200px, 62vw, 300px); height: clamp(200px, 62vw, 300px); }
-      .logo-full { max-width: clamp(80px, 28vw, 140px); height: auto; }
+      .logo-full { max-width: clamp(120px, 42vw, 210px); height: auto; margin-top: 8px; }
       .tagline-center { font-size: 15px; padding: 0 20px; }
       .cd-num { font-size: 36px; }
       .cd-block { min-width: 60px; padding: 12px 8px 10px; }
       .cd-sep { font-size: 20px; }
       .newsletter { margin: 0 16px; width: calc(100% - 32px); }
+      #photo-credit { bottom: 44px; right: 12px; font-size: 10px; max-width: 140px; }
     }
   </style>
 </head>
