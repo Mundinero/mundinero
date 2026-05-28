@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: '0 14 * * 1-5'   # 8:00am CST, lunes a viernes
     - cron: '30 21 * * 1-5'  # 3:30pm CST, cierre de mercado MX
+  push:
+    paths:
+      - 'Wallpapers/**'       # cualquier imagen nueva o modificada
   workflow_dispatch:           # permite correr manualmente desde GitHub
 
 jobs:
