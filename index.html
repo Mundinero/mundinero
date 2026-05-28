@@ -84,7 +84,22 @@
       background: rgba(31,30,29,0.28);
     }
 
-    /* ── PHOTO CREDIT (in footer) ── */
+    /* ── PHOTO CREDIT (fixed) ── */
+    #photo-credit {
+      position: fixed;
+      bottom: 80px;
+      right: 16px;
+      left: auto;
+      text-align: right;
+      z-index: 10;
+      pointer-events: none;
+      font-size: 11px;
+      color: rgba(247,246,243,0.6);
+      line-height: 1.4;
+      max-width: 160px;
+      transition: opacity 0.8s ease;
+      font-family: var(--sans);
+    }
     #photo-credit b { color: rgba(247,246,243,0.65); font-weight: 600; }
 
     /* ── TICKER — Liquid Glass ── */
@@ -566,10 +581,12 @@
 
 </div>
 
+<!-- PHOTO CREDIT (fixed, independent of footer) -->
+<div id="photo-credit"></div>
+
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-by">Por Monexus S.A.S. de C.V. · Marca registrada IMPI</div>
-  <div id="photo-credit" style="font-size:11px;color:rgba(247,246,243,0.45);text-align:center;flex:1;transition:opacity 0.8s ease;"></div>
   <div class="footer-contact">
     <span class="footer-contact-label">Contacto</span>
     <a class="footer-icon-link" href="https://instagram.com/mundinero" target="_blank" rel="noopener" aria-label="Instagram">
