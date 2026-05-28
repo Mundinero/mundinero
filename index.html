@@ -500,6 +500,31 @@
       #photo-credit { display: none; }
       .ticker-track { animation-duration: 15s; }
     }
+
+    /* ── ALTURA COMPRIMIDA (ventana corta) ── */
+    @media (max-height: 680px) {
+      .page         { padding-top: 60px; }
+      .hero         { padding: 8px 40px 4px; }
+      .logo-area    { margin-top: 0; gap: 10px; }
+      .brand-seal   { width: clamp(120px, 22vh, 180px); height: clamp(120px, 22vh, 180px); }
+      .logo-full    { display: none; }
+      .bottom       { padding: 0 24px 52px; gap: 8px; }
+      .cd-block     { padding: 8px 16px; }
+      .cd-num       { font-size: clamp(28px, 3.5vw, 44px); }
+      .launch-date  { display: none; }
+    }
+
+    @media (max-height: 520px) {
+      .page         { padding-top: 54px; }
+      .hero         { padding: 4px 40px 0; }
+      .brand-seal   { width: clamp(80px, 16vh, 120px); height: clamp(80px, 16vh, 120px); }
+      .bottom       { padding: 0 24px 46px; gap: 6px; }
+      .cd-block     { padding: 6px 12px; min-width: 70px; }
+      .cd-num       { font-size: 28px; }
+      .cd-label     { display: none; }
+      .status-row   { display: none; }
+      .nl-note      { display: none; }
+    }
   </style>
 </head>
 <!-- SVG Liquid Glass filter (hidden) -->
