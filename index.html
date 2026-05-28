@@ -403,16 +403,22 @@
     }
     .footer-icon-link:hover { color: var(--azul); }
 
-    /* ── MOBILE ── */
-    @media (max-width: 768px) {
-      .logo-area { padding: 0 12px; }
-      .logo-full { max-height: clamp(48px, 13vw, 72px); width: auto; max-width: 100%; }
-      .tagline-center { font-size: 15px; padding: 0 20px; }
-      .cd-num { font-size: 36px; }
-      .cd-block { min-width: 60px; padding: 12px 8px 10px; }
-      .cd-sep { font-size: 20px; }
-      .newsletter { margin: 0 16px; width: calc(100% - 32px); }
-      .photo-credit { bottom: 56px; font-size: 11px; }
+    /* ── MOBILE: zero scroll ── */
+    @media (max-width: 700px) {
+      .page { padding-top: 80px; }
+      .ticker { top: 10px; left: 10px; right: 10px; height: 34px; }
+      .hero { padding: 8px 18px 4px; }
+      .logo-area { padding: 0 4px; }
+      .logo-full { max-height: 22vw; width: auto; max-width: 100%; }
+      .logo-area { margin-top: 28px; }
+      .tagline-center { font-size: 21px; letter-spacing: 0.05em; margin-top: 12px; }
+      .bottom { padding: 0 16px 112px; gap: 8px; }
+      .cd-block { min-width: 68px; padding: 8px 12px; }
+      .cd-num { font-size: clamp(28px, 7vw, 44px); }
+      .cd-sep { font-size: 18px; }
+      .footer { padding: 10px 16px; }
+      .footer-by { font-size: 9px; }
+      .photo-credit { bottom: 60px; font-size: 10px; }
     }
   </style>
 </head>
