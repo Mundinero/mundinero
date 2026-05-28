@@ -1,0 +1,36 @@
+name: Actualizar datos ticker
+
+on:
+  schedule:
+    - cron: '0 14 * * 1-5'   # 8:00am CST, lunes a viernes
+    - cron: '30 21 * * 1-5'  # 3:30pm CST, cierre de mercado MX
+  workflow_dispatch:           # permite correr manualmente desde GitHub
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Actualizar valores en index.html
+        run: node scripts/update-ticker.js
+        env:
+          BANXICO_TOKEN: ${{ secrets.BANXICO_TOKEN }}
+          INEGI_TOKEN: ${{ secrets.INEGI_TOKEN }}
+
+      - name: Commit y push si hubo cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git diff --quiet index.html || (
+            git add index.html &&
+            git commit -m "chore: datos ticker $(date +'%Y-%m-%d %H:%M UTC')" &&
+            git push
+          )
