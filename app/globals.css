@@ -1,26 +1,64 @@
+/* ── Fuentes ─────────────────────────────────────────────────────────────── */
+/* Satoshi — Fontshare (producción: auto-hospeda los .woff2 en /public/fonts) */
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap');
+/* Fraunces — Google Fonts, WONK 0 / SOFT 0 (registro serio) */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..700,0,0&display=swap');
+
 @import "tailwindcss";
 
+/* ── Tokens Mundinero v2 ─────────────────────────────────────────────────── */
 @theme {
-  /* Paleta Mundinero */
-  --color-tinta: #1f1e1d;
-  --color-crema: #F7F6F3;
-  --color-azul: #5170ff;
-  --color-azuldk: #6B87FF;
-  --color-positivo: #34D87F;
-  --color-negativo: #FF6B6B;
-  --color-positivolk: #0B6B38;
-  --color-negativolk: #A62820;
-  --color-radar: #2a2928;
+  /* Neutrales — base cálida */
+  --color-tinta:          #1f1e1d;
+  --color-crema:          #F7F6F3;
+  --color-surface-dark:   #2a2928;
+  --color-surface-light:  #ECEAE5;
+  --color-hairline-dark:  #3a3833;
+  --color-hairline-light: #DEDBD4;
+  --color-muted-dark:     #8b887f;   /* texto terciario dark (4.7 AA) */
+  --color-muted-light:    #5F5E5A;   /* texto secundario light (6.0 AA) */
+  --color-soft-dark:      #cfccc4;   /* texto secundario dark (10.4) */
+  --color-soft-light:     #B8B4AC;   /* solo bordes light — nunca texto */
 
-  /* Tipografía — valores base; next/font los sobreescribe en runtime */
-  --font-serif: 'Newsreader', Georgia, serif;
-  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  /* Azul — único acento frío, uso escaso */
+  --color-azul:           #5170ff;   /* fills/botones/mancheta en light */
+  --color-azuldk:         #6B87FF;   /* link/acento/badge en dark */
+  --color-azul-text:      #3A57E8;   /* links y texto chico en light (5.24 AA) */
+  --color-azul-hover-dk:  #8A9DFF;
+  --color-azul-hover-lt:  #2E47C9;
+
+  /* Señales — SOLO deltas financieras, nunca decorativas */
+  --color-positivo:       #34D87F;   /* verde dark (8.9 AAA) */
+  --color-negativo:       #FF6B6B;   /* rojo dark (6.0 AA) */
+  --color-verde-light:    #0B6B38;   /* verde light (6.1 AA) */
+  --color-rojo-light:     #A62820;   /* rojo light (6.6 AA) */
+
+  /* Tipografía */
+  --font-serif: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+  --font-sans:  'Satoshi', 'Inter', system-ui, sans-serif;
 }
 
+/* ── Titular serif optimizado (opsz alto, WONK 0, SOFT 0) ───────────────── */
+.h-serif {
+  font-family: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+  font-variation-settings: 'opsz' 144, 'SOFT' 0, 'WONK' 0;
+  letter-spacing: -0.01em;
+}
+
+/* ── Keyframes ───────────────────────────────────────────────────────────── */
 @keyframes ticker {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
+}
+
+@keyframes spin-cw {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes spin-ccw {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
 }
 
 @keyframes blink {
@@ -28,6 +66,7 @@
   50%       { opacity: 0.2; }
 }
 
+/* ── Base ────────────────────────────────────────────────────────────────── */
 body {
   background-color: var(--color-tinta);
   color: var(--color-crema);
