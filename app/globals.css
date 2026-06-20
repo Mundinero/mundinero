@@ -1,6 +1,26 @@
 /* ── Fuentes ─────────────────────────────────────────────────────────────── */
-/* Satoshi — Fontshare (producción: auto-hospeda los .woff2 en /public/fonts) */
-@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap');
+/* Satoshi — auto-hospedada en /public/fonts (OFL, Fontshare) */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
 /* Fraunces — Google Fonts, WONK 0 / SOFT 0 (registro serio) */
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..700,0,0&display=swap');
 
