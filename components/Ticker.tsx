@@ -11,6 +11,33 @@ const items = [
   { label: "REAL YIELD", value: "+5.73%",   change: null,     up: null  },
 ];
 
+const trackStyle: React.CSSProperties = {
+  animation: "ticker 45s linear infinite",
+  fontFamily: "'Satoshi', sans-serif",
+  fontFeatureSettings: '"tnum" 1',
+  fontVariantNumeric: "tabular-nums",
+};
+
+const labelStyle: React.CSSProperties = {
+  fontSize: "11.5px",
+  fontWeight: 500,
+  textTransform: "uppercase",
+  letterSpacing: "0.04em",
+  color: "rgba(247,246,243,0.45)",
+};
+
+const valueStyle: React.CSSProperties = {
+  fontSize: "11.5px",
+  fontWeight: 600,
+  color: "rgba(247,246,243,0.9)",
+};
+
+const deltaStyle = (up: boolean): React.CSSProperties => ({
+  fontSize: "11.5px",
+  fontWeight: 600,
+  color: up ? "#34D87F" : "#FF6B6B",
+});
+
 export default function Ticker() {
   const doubled = [...items, ...items];
 
@@ -18,31 +45,29 @@ export default function Ticker() {
     <div className="bg-tinta border-b border-hairline-dark h-9 flex items-stretch overflow-hidden">
       {/* Badge EN VIVO */}
       <div className="flex-shrink-0 px-3 flex items-center border-r border-hairline-dark">
-        <span className="text-azuldk text-[10px] font-bold tracking-[0.22em] uppercase font-sans">
+        <span
+          style={{
+            fontFamily: "'Satoshi', sans-serif",
+            fontSize: "10px",
+            fontWeight: 700,
+            letterSpacing: "0.22em",
+            color: "#6B87FF",
+            textTransform: "uppercase",
+          }}
+        >
           EN VIVO
         </span>
       </div>
 
       {/* Track */}
       <div className="overflow-hidden flex-1">
-        <div
-          className="flex items-center h-full whitespace-nowrap"
-          style={{ animation: "ticker 45s linear infinite" }}
-        >
+        <div className="flex items-center h-full whitespace-nowrap" style={trackStyle}>
           {doubled.map((item, i) => (
             <span key={i} className="inline-flex items-center gap-1.5 px-5">
-              <span className="text-muted-dark text-[11px] font-medium tracking-[0.12em] uppercase font-sans">
-                {item.label}
-              </span>
-              <span className="text-crema text-[12px] font-semibold font-sans">
-                {item.value}
-              </span>
+              <span style={labelStyle}>{item.label}</span>
+              <span style={valueStyle}>{item.value}</span>
               {item.change !== null && item.up !== null && (
-                <span
-                  className={`text-[11px] font-semibold font-sans ${
-                    item.up ? "text-positivo" : "text-negativo"
-                  }`}
-                >
+                <span style={deltaStyle(item.up!)}>
                   {item.up ? "▲" : "▼"} {item.change}
                 </span>
               )}
