@@ -15,36 +15,39 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 bg-tinta/90 backdrop-blur-md border-b border-crema/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+    <nav className="sticky top-0 z-50 bg-tinta border-b border-hairline-dark">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-14 lg:px-20 h-14 flex items-center justify-between">
 
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <span className="font-serif text-3xl font-bold text-azuldk leading-none">₥</span>
-          <span className="font-serif text-base font-bold tracking-[0.14em] text-crema uppercase">
+        {/* Wordmark */}
+        <Link href="/" className="flex items-center gap-2 flex-shrink-0">
+          <span className="font-serif text-2xl font-bold text-azuldk leading-none">₥</span>
+          <span
+            className="font-sans text-[13px] font-bold tracking-[0.18em] text-crema uppercase"
+            style={{ letterSpacing: "0.18em" }}
+          >
             MUNDINERO
           </span>
         </Link>
 
-        {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-6">
+        {/* Desktop nav links */}
+        <div className="hidden md:flex items-center gap-7">
           {links.map((l) => (
             <Link
               key={l.label}
               href={l.href}
-              className="text-crema/60 hover:text-crema text-sm font-medium tracking-wide transition-colors"
+              className="text-muted-dark hover:text-crema text-[13px] font-medium tracking-wide transition-colors font-sans"
             >
               {l.label}
             </Link>
           ))}
         </div>
 
-        {/* Desktop CTA */}
+        {/* Desktop CTA — ghost, no fill */}
         <Link
           href="#newsletter"
-          className="hidden md:inline-flex items-center bg-azul hover:bg-azul/85 text-crema text-sm font-semibold px-4 py-2 rounded transition-colors"
+          className="hidden md:inline-flex items-center text-muted-dark hover:text-crema text-[13px] font-medium tracking-wide transition-colors font-sans gap-1"
         >
-          Suscribirse
+          Suscribirse <span className="text-azuldk">→</span>
         </Link>
 
         {/* Mobile hamburger */}
@@ -55,9 +58,9 @@ export default function Nav() {
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             {open ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
             ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
             )}
           </svg>
         </button>
@@ -65,13 +68,13 @@ export default function Nav() {
 
       {/* Mobile drawer */}
       {open && (
-        <div className="md:hidden border-t border-crema/10 bg-tinta px-4 py-3 flex flex-col gap-1">
+        <div className="md:hidden border-t border-hairline-dark bg-tinta px-6 py-4 flex flex-col gap-1">
           {links.map((l) => (
             <Link
               key={l.label}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="py-2 text-crema/70 hover:text-crema text-sm font-medium"
+              className="py-3 text-muted-dark hover:text-crema text-sm font-medium font-sans border-b border-hairline-dark last:border-0"
             >
               {l.label}
             </Link>
@@ -79,9 +82,9 @@ export default function Nav() {
           <Link
             href="#newsletter"
             onClick={() => setOpen(false)}
-            className="mt-2 text-center bg-azul text-crema text-sm font-semibold px-4 py-2 rounded"
+            className="mt-3 text-crema text-sm font-medium font-sans"
           >
-            Suscribirse
+            Suscribirse →
           </Link>
         </div>
       )}

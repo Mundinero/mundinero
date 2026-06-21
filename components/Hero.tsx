@@ -5,101 +5,104 @@ import Link from "next/link";
 import BrandSeal from "./BrandSeal";
 
 const fade = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 20 },
   show: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: {
-      delay: i * 0.12,
-      duration: 0.7,
-      ease: [0.25, 0.1, 0.25, 1] as const,
-    },
+    transition: { delay: i * 0.1, duration: 0.65, ease: [0.25, 0.1, 0.25, 1] as const },
   }),
 };
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex flex-col items-center justify-center text-center px-4 overflow-hidden">
+    <section className="min-h-[88vh] flex flex-col justify-center px-6 md:px-14 lg:px-20 pt-16 pb-28 overflow-hidden">
+      <div className="max-w-[1400px] mx-auto w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-0 items-start">
 
-      <div className="relative z-10 max-w-4xl mx-auto w-full flex flex-col items-center gap-8">
+          {/* ── Bloque editorial izquierdo ── */}
+          <div className="max-w-[820px]">
 
-        {/* Sello giratorio */}
-        <motion.div
-          custom={0}
-          variants={fade}
-          initial="hidden"
-          animate="show"
-        >
-          <BrandSeal size={160} />
-        </motion.div>
+            {/* Eyebrow con tick azuldk */}
+            <motion.div
+              custom={0} variants={fade} initial="hidden" animate="show"
+              className="flex items-center gap-4 mb-10 md:mb-14"
+            >
+              <span className="h-px w-10 flex-shrink-0 bg-azuldk" />
+              <p className="font-sans text-[11px] font-medium tracking-[0.22em] uppercase text-muted-dark">
+                Mundinero · Por Monexus
+              </p>
+            </motion.div>
 
-        {/* Eyebrow */}
-        <motion.p
-          custom={1}
-          variants={fade}
-          initial="hidden"
-          animate="show"
-          className="text-muted-dark text-[11px] font-semibold tracking-[0.28em] uppercase font-sans -mt-2"
-        >
-          Mundinero · Por Monexus
-        </motion.p>
+            {/* Headline display */}
+            <motion.h1
+              custom={1} variants={fade} initial="hidden" animate="show"
+              className="h-serif font-bold text-crema"
+              style={{
+                fontSize: "clamp(64px, 9.5vw, 128px)",
+                lineHeight: 0.92,
+                letterSpacing: "-0.025em",
+              }}
+            >
+              El futuro del<br />
+              dinero habla.
+            </motion.h1>
 
-        {/* Headline */}
-        <motion.h1
-          custom={2}
-          variants={fade}
-          initial="hidden"
-          animate="show"
-          className="h-serif font-bold text-[clamp(44px,8vw,84px)] leading-[1.04] text-crema -mt-2"
-        >
-          El futuro del dinero habla.
-        </motion.h1>
+            {/* Separador hairline */}
+            <motion.div
+              custom={2} variants={fade} initial="hidden" animate="show"
+              className="border-t border-hairline-dark my-8 md:my-10"
+            />
 
-        {/* Tagline */}
-        <motion.h2
-          custom={3}
-          variants={fade}
-          initial="hidden"
-          animate="show"
-          className="h-serif italic font-semibold text-[clamp(34px,6vw,68px)] leading-[1.1] text-azuldk -mt-4"
-        >
-          Nosotros lo traducimos.
-        </motion.h2>
+            {/* Tagline italic en azuldk */}
+            <motion.h2
+              custom={3} variants={fade} initial="hidden" animate="show"
+              className="h-serif italic font-semibold text-azuldk"
+              style={{
+                fontSize: "clamp(36px, 5vw, 68px)",
+                lineHeight: 0.95,
+                letterSpacing: "-0.02em",
+              }}
+            >
+              Nosotros lo<br />
+              traducimos.
+            </motion.h2>
 
-        {/* Descripción */}
-        <motion.p
-          custom={4}
-          variants={fade}
-          initial="hidden"
-          animate="show"
-          className="text-muted-dark text-base md:text-[17px] font-sans font-medium max-w-md mx-auto leading-relaxed -mt-2"
-        >
-          Análisis financiero editorial para México y el mundo. Tasas, dólares,
-          cripto, mercados y la economía que mueve tu día a día.
-        </motion.p>
+            {/* Descripción + CTAs */}
+            <motion.div
+              custom={4} variants={fade} initial="hidden" animate="show"
+              className="mt-10 md:mt-14"
+            >
+              <p className="font-sans text-muted-dark text-[15px] leading-[1.65] max-w-[440px] mb-8">
+                Análisis financiero editorial para México y el mundo.
+                Tasas, dólares, cripto, mercados y la economía que mueve tu día a día.
+              </p>
 
-        {/* CTAs */}
-        <motion.div
-          custom={5}
-          variants={fade}
-          initial="hidden"
-          animate="show"
-          className="flex flex-col sm:flex-row items-center justify-center gap-3"
-        >
-          <Link
-            href="#noticias"
-            className="bg-azul hover:bg-azul-hover-lt text-crema font-semibold px-8 py-3 text-sm tracking-wide transition-colors font-sans"
+              <div className="flex items-center gap-8">
+                <Link
+                  href="#noticias"
+                  className="font-sans text-crema text-sm font-medium hover:text-azuldk transition-colors tracking-wide"
+                >
+                  Leer ahora →
+                </Link>
+                <Link
+                  href="#newsletter"
+                  className="font-sans text-muted-dark text-sm font-medium hover:text-crema transition-colors underline underline-offset-4 decoration-hairline-dark hover:decoration-crema/40"
+                >
+                  Suscribirse gratis
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* ── Sello editorial derecho ── */}
+          <motion.div
+            custom={2} variants={fade} initial="hidden" animate="show"
+            className="hidden lg:flex items-start justify-end pt-2 pl-12 flex-shrink-0"
           >
-            Leer ahora
-          </Link>
-          <Link
-            href="#newsletter"
-            className="border border-hairline-dark hover:border-soft-dark text-muted-dark hover:text-crema font-semibold px-8 py-3 text-sm tracking-wide transition-colors font-sans"
-          >
-            Suscribirse gratis →
-          </Link>
-        </motion.div>
+            <BrandSeal size={210} />
+          </motion.div>
 
+        </div>
       </div>
     </section>
   );

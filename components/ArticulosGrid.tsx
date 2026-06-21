@@ -5,7 +5,6 @@ const articles = [
     author: "Redacción Mundinero",
     date: "27 may 2026",
     time: "6 min",
-    accent: "bg-azul/15",
   },
   {
     category: "Cripto",
@@ -13,7 +12,6 @@ const articles = [
     author: "Análisis Técnico",
     date: "26 may 2026",
     time: "8 min",
-    accent: "bg-positivo/10",
   },
   {
     category: "Peso",
@@ -21,7 +19,6 @@ const articles = [
     author: "Desk FX",
     date: "26 may 2026",
     time: "5 min",
-    accent: "bg-crema/5",
   },
   {
     category: "Remesas",
@@ -29,7 +26,6 @@ const articles = [
     author: "Redacción Mundinero",
     date: "25 may 2026",
     time: "4 min",
-    accent: "bg-negativo/10",
   },
   {
     category: "Presupuesto",
@@ -37,7 +33,6 @@ const articles = [
     author: "Macroeconomía MX",
     date: "24 may 2026",
     time: "7 min",
-    accent: "bg-azuldk/10",
   },
   {
     category: "Fed",
@@ -45,63 +40,70 @@ const articles = [
     author: "Global Desk",
     date: "23 may 2026",
     time: "5 min",
-    accent: "bg-positivo/5",
   },
 ];
 
 export default function ArticulosGrid() {
   return (
-    <section id="noticias" className="py-16 px-4 border-t border-crema/10">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="flex items-end justify-between mb-8">
+    <section id="noticias" className="px-6 md:px-14 lg:px-20 py-24 border-t border-hairline-dark">
+      <div className="max-w-[1400px] mx-auto">
+
+        {/* Heading */}
+        <div className="flex items-end justify-between mb-16">
           <div>
-            <span className="text-crema/50 text-xs font-semibold tracking-[0.22em] uppercase">
+            <p className="font-sans text-[11px] font-medium tracking-[0.22em] uppercase text-muted-dark mb-4">
               Análisis
-            </span>
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-crema mt-1">
+            </p>
+            <h2
+              className="h-serif font-bold text-crema"
+              style={{ fontSize: "clamp(48px, 6vw, 80px)", lineHeight: 0.92, letterSpacing: "-0.02em" }}
+            >
               Noticias
             </h2>
           </div>
-          <a href="#" className="text-azuldk text-sm font-semibold hover:underline">
+          <a
+            href="#"
+            className="font-sans text-azuldk text-sm font-medium hover:text-crema transition-colors tracking-wide"
+          >
             Ver todo →
           </a>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Lista tipográfica — sin cards, sin thumbnails */}
+        <div>
           {articles.map((a, i) => (
             <article
               key={i}
-              className="border border-crema/10 rounded-lg overflow-hidden hover:border-crema/25 transition-colors group cursor-pointer"
+              className="py-8 border-b border-hairline-dark last:border-0 grid grid-cols-1 md:grid-cols-[160px_1fr] gap-3 md:gap-10 group cursor-pointer"
             >
-              {/* Placeholder thumbnail */}
-              <div
-                className={`h-36 ${a.accent} flex items-center justify-center`}
-              >
-                <span className="text-crema/20 text-[11px] font-bold tracking-widest uppercase">
+              {/* Categoría con tick azuldk */}
+              <div className="flex items-center gap-3 md:pt-1">
+                <span className="h-px w-5 flex-shrink-0 bg-azuldk" />
+                <span className="font-sans text-[11px] font-medium tracking-[0.14em] uppercase text-azuldk">
                   {a.category}
                 </span>
               </div>
 
-              <div className="p-5">
-                <span className="text-azuldk text-[11px] font-bold tracking-widest uppercase">
-                  {a.category}
-                </span>
-                <h3 className="font-serif text-lg font-bold text-crema mt-1 leading-snug group-hover:text-azuldk transition-colors">
+              {/* Titular + meta */}
+              <div>
+                <h3
+                  className="font-serif font-bold text-crema leading-[1.1] group-hover:text-azuldk transition-colors"
+                  style={{ fontSize: "clamp(20px, 2.2vw, 28px)", letterSpacing: "-0.01em" }}
+                >
                   {a.title}
                 </h3>
-                <div className="flex items-center gap-2 mt-3 text-crema/40 text-xs">
+                <div className="flex items-center gap-2 mt-3 font-sans text-muted-dark text-xs">
                   <span>{a.author}</span>
-                  <span>·</span>
+                  <span className="text-hairline-dark">·</span>
                   <span>{a.date}</span>
-                  <span>·</span>
+                  <span className="text-hairline-dark">·</span>
                   <span>{a.time} lectura</span>
                 </div>
               </div>
             </article>
           ))}
         </div>
+
       </div>
     </section>
   );

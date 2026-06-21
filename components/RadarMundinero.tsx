@@ -34,58 +34,72 @@ const signals: Signal[] = [
   },
 ];
 
-const badgeClass: Record<SignalType, string> = {
-  Alerta:  "bg-negativo text-tinta",
-  Evento:  "bg-azul text-crema",
-  Vigilar: "bg-crema/15 text-crema",
-  Dato:    "bg-positivo text-tinta",
+const badgeStyle: Record<SignalType, React.CSSProperties> = {
+  Alerta:  { background: "#FF6B6B", color: "#1f1e1d" },
+  Evento:  { background: "#5170ff", color: "#F7F6F3" },
+  Vigilar: { background: "rgba(247,246,243,0.10)", color: "#F7F6F3" },
+  Dato:    { background: "#34D87F", color: "#1f1e1d" },
 };
 
-function SignalCard({ type, title, desc, time }: Signal) {
+function SignalRow({ type, title, desc, time }: Signal) {
   return (
-    <div className="border border-crema/10 rounded p-4 hover:border-crema/25 transition-colors">
-      <div className="flex items-start justify-between gap-3 mb-2">
+    <div className="py-7 grid grid-cols-1 md:grid-cols-[140px_1fr_72px] gap-3 md:gap-8 items-start border-b border-hairline-dark last:border-0 group">
+      <div className="flex items-center gap-3">
         <span
-          className={`text-[10px] font-bold tracking-widest px-2 py-0.5 rounded-sm uppercase flex-shrink-0 ${badgeClass[type]}`}
+          className="text-[10px] font-bold tracking-[0.14em] px-2 py-1 uppercase flex-shrink-0 font-sans"
+          style={badgeStyle[type]}
         >
           {type}
         </span>
-        <span className="text-crema/35 text-xs font-medium flex-shrink-0">{time}</span>
       </div>
-      <p className="text-crema font-semibold text-sm leading-snug mb-1">{title}</p>
-      <p className="text-crema/55 text-xs leading-relaxed">{desc}</p>
+      <div>
+        <p className="font-serif text-lg md:text-xl font-bold text-crema leading-[1.15] group-hover:text-azuldk transition-colors"
+           style={{ letterSpacing: "-0.01em" }}>
+          {title}
+        </p>
+        <p className="font-sans text-muted-dark text-sm leading-relaxed mt-1.5">{desc}</p>
+      </div>
+      <p className="font-sans text-muted-dark text-xs font-medium pt-0.5 md:text-right">{time}</p>
     </div>
   );
 }
 
 export default function RadarMundinero() {
   return (
-    <section id="radar" className="py-16 px-4">
-      <div className="max-w-7xl mx-auto">
-        <div className="bg-radar rounded-lg p-6 md:p-8">
-          {/* Header */}
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-3">
+    <section id="radar" className="px-6 md:px-14 lg:px-20 py-24 border-t border-hairline-dark">
+      <div className="max-w-[1400px] mx-auto">
+
+        {/* Heading */}
+        <div className="flex items-end justify-between mb-16">
+          <div>
+            <div className="flex items-center gap-3 mb-4">
               <span
                 className="w-2 h-2 rounded-full bg-positivo flex-shrink-0"
                 style={{ animation: "blink 1.4s ease-in-out infinite" }}
               />
-              <h2 className="font-serif text-2xl font-bold text-crema">
-                Radar Mundinero
-              </h2>
+              <p className="font-sans text-[11px] font-medium tracking-[0.22em] uppercase text-muted-dark">
+                En vivo
+              </p>
             </div>
-            <span className="text-crema/35 text-xs font-medium tracking-wide hidden sm:block">
-              27 MAY 2026 · 14:32 CST
-            </span>
+            <h2
+              className="h-serif font-bold text-crema"
+              style={{ fontSize: "clamp(48px, 6vw, 80px)", lineHeight: 0.92, letterSpacing: "-0.02em" }}
+            >
+              Radar<br />Mundinero
+            </h2>
           </div>
-
-          {/* Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {signals.map((s, i) => (
-              <SignalCard key={i} {...s} />
-            ))}
-          </div>
+          <span className="font-sans text-muted-dark text-xs font-medium tracking-wide hidden sm:block">
+            27 MAY 2026 · 14:32 CST
+          </span>
         </div>
+
+        {/* Señales como filas tipográficas */}
+        <div>
+          {signals.map((s, i) => (
+            <SignalRow key={i} {...s} />
+          ))}
+        </div>
+
       </div>
     </section>
   );
