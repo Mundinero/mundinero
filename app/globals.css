@@ -1,4 +1,7 @@
 /* ── Fuentes ─────────────────────────────────────────────────────────────── */
+/* Fraunces se carga vía <link> en layout.tsx (evita conflicto con PostCSS) */
+@import "tailwindcss";
+
 /* Satoshi — auto-hospedada en /public/fonts (OFL, Fontshare) */
 @font-face {
   font-family: 'Satoshi';
@@ -21,10 +24,6 @@
   font-display: swap;
   font-style: normal;
 }
-/* Fraunces — Google Fonts, WONK 0 / SOFT 0 (registro serio) */
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..700,0,0&display=swap');
-
-@import "tailwindcss";
 
 /* ── Tokens Mundinero v2 ─────────────────────────────────────────────────── */
 @theme {

@@ -15,95 +15,158 @@ const fade = {
 
 export default function Hero() {
   return (
-    <section className="min-h-[88vh] flex flex-col justify-center px-6 md:px-14 lg:px-20 pt-16 pb-28 overflow-hidden">
-      <div className="max-w-[1400px] mx-auto w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-0 items-start">
-
-          {/* ── Bloque editorial izquierdo ── */}
-          <div className="max-w-[820px]">
-
-            {/* Eyebrow con tick azuldk */}
-            <motion.div
-              custom={0} variants={fade} initial="hidden" animate="show"
-              className="flex items-center gap-4 mb-10 md:mb-14"
-            >
-              <span className="h-px w-10 flex-shrink-0 bg-azuldk" />
-              <p className="font-sans text-[11px] font-medium tracking-[0.22em] uppercase text-muted-dark">
-                Mundinero · Por Monexus
-              </p>
-            </motion.div>
-
-            {/* Headline display */}
-            <motion.h1
-              custom={1} variants={fade} initial="hidden" animate="show"
-              className="h-serif font-bold text-crema"
+    <section
+      className="relative overflow-hidden"
+      style={{ background: "#5170ff", minHeight: "100vh" }}
+    >
+      {/* ── Mobile: sello arriba, texto abajo ── */}
+      <div className="lg:hidden flex flex-col">
+        <div className="flex justify-center items-center pt-8 pb-2">
+          {/* Lavado radial detrás del sello */}
+          <div className="relative">
+            <div
+              className="absolute inset-0"
               style={{
-                fontSize: "clamp(64px, 9.5vw, 128px)",
-                lineHeight: 0.92,
-                letterSpacing: "-0.025em",
+                background:
+                  "radial-gradient(ellipse at center, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 70%)",
+                borderRadius: "50%",
               }}
-            >
-              El futuro del<br />
-              dinero habla.
-            </motion.h1>
-
-            {/* Separador hairline */}
-            <motion.div
-              custom={2} variants={fade} initial="hidden" animate="show"
-              className="border-t border-hairline-dark my-8 md:my-10"
             />
-
-            {/* Tagline italic en azuldk */}
-            <motion.h2
-              custom={3} variants={fade} initial="hidden" animate="show"
-              className="h-serif italic font-semibold text-azuldk"
-              style={{
-                fontSize: "clamp(36px, 5vw, 68px)",
-                lineHeight: 0.95,
-                letterSpacing: "-0.02em",
-              }}
-            >
-              Nosotros lo<br />
-              traducimos.
-            </motion.h2>
-
-            {/* Descripción + CTAs */}
-            <motion.div
-              custom={4} variants={fade} initial="hidden" animate="show"
-              className="mt-10 md:mt-14"
-            >
-              <p className="font-sans text-muted-dark text-[15px] leading-[1.65] max-w-[440px] mb-8">
-                Análisis financiero editorial para México y el mundo.
-                Tasas, dólares, cripto, mercados y la economía que mueve tu día a día.
-              </p>
-
-              <div className="flex items-center gap-8">
-                <Link
-                  href="#noticias"
-                  className="font-sans text-crema text-sm font-medium hover:text-azuldk transition-colors tracking-wide"
-                >
-                  Leer ahora →
-                </Link>
-                <Link
-                  href="#newsletter"
-                  className="font-sans text-muted-dark text-sm font-medium hover:text-crema transition-colors underline underline-offset-4 decoration-hairline-dark hover:decoration-crema/40"
-                >
-                  Suscribirse gratis
-                </Link>
-              </div>
-            </motion.div>
+            <div style={{ width: "min(80vw, 360px)", height: "min(80vw, 360px)" }}>
+              <BrandSeal size="100%" />
+            </div>
           </div>
+        </div>
 
-          {/* ── Sello editorial derecho ── */}
+        <div className="px-6 pt-4 pb-16">
+          <TextBlock />
+        </div>
+      </div>
+
+      {/* ── Desktop: grid 50/50 ── */}
+      <div className="hidden lg:grid grid-cols-2" style={{ minHeight: "100vh" }}>
+
+        {/* Columna izquierda — sello */}
+        <div className="relative flex items-center justify-center">
+          {/* Lavado radial para separar sello del azul plano */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse at center, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0) 68%)",
+            }}
+          />
           <motion.div
-            custom={2} variants={fade} initial="hidden" animate="show"
-            className="hidden lg:flex items-start justify-end pt-2 pl-12 flex-shrink-0"
+            custom={0}
+            variants={fade}
+            initial="hidden"
+            animate="show"
+            className="relative"
           >
-            <BrandSeal size={210} />
+            <div style={{ width: "min(44vw, 85vh)", height: "min(44vw, 85vh)" }}>
+              <BrandSeal size="100%" />
+            </div>
           </motion.div>
+        </div>
 
+        {/* Columna derecha — texto */}
+        <div className="flex items-center px-12 xl:px-16 py-16">
+          <TextBlock />
         </div>
       </div>
     </section>
+  );
+}
+
+function TextBlock() {
+  return (
+    <div className="max-w-[520px]">
+      {/* Eyebrow */}
+      <motion.div
+        custom={1}
+        variants={fade}
+        initial="hidden"
+        animate="show"
+        className="flex items-center gap-4 mb-10"
+      >
+        <span className="h-px w-10 flex-shrink-0" style={{ background: "rgba(247,246,243,0.45)" }} />
+        <p
+          className="font-sans text-[11px] font-medium uppercase"
+          style={{ color: "rgba(247,246,243,0.65)", letterSpacing: "0.22em" }}
+        >
+          Mundinero · Por Monexus
+        </p>
+      </motion.div>
+
+      {/* Headline */}
+      <motion.h1
+        custom={2}
+        variants={fade}
+        initial="hidden"
+        animate="show"
+        className="h-serif font-bold"
+        style={{
+          color: "#F7F6F3",
+          fontSize: "clamp(52px, 6.5vw, 100px)",
+          lineHeight: 0.92,
+          letterSpacing: "-0.025em",
+        }}
+      >
+        El futuro del<br />
+        dinero habla.
+      </motion.h1>
+
+      {/* Hairline */}
+      <motion.div
+        custom={3}
+        variants={fade}
+        initial="hidden"
+        animate="show"
+        className="my-8 md:my-10"
+        style={{ borderTop: "1px solid rgba(247,246,243,0.18)" }}
+      />
+
+      {/* Descripción */}
+      <motion.p
+        custom={4}
+        variants={fade}
+        initial="hidden"
+        animate="show"
+        className="font-sans leading-[1.65]"
+        style={{
+          color: "rgba(247,246,243,0.70)",
+          fontSize: "15px",
+          maxWidth: "400px",
+          marginBottom: "2rem",
+        }}
+      >
+        Análisis financiero editorial para México y el mundo.
+        Tasas, dólares, cripto, mercados y la economía que mueve tu día a día.
+      </motion.p>
+
+      {/* CTAs */}
+      <motion.div
+        custom={5}
+        variants={fade}
+        initial="hidden"
+        animate="show"
+        className="flex items-center gap-8"
+      >
+        <Link
+          href="#noticias"
+          className="font-sans text-sm font-medium transition-opacity hover:opacity-75"
+          style={{ color: "#F7F6F3" }}
+        >
+          Leer ahora →
+        </Link>
+        <Link
+          href="#newsletter"
+          className="font-sans text-sm font-medium transition-opacity hover:opacity-75 underline underline-offset-4"
+          style={{ color: "rgba(247,246,243,0.55)", textDecorationColor: "rgba(247,246,243,0.25)" }}
+        >
+          Suscribirse gratis
+        </Link>
+      </motion.div>
+    </div>
   );
 }
