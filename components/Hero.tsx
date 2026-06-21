@@ -13,28 +13,25 @@ const fade = {
   }),
 };
 
+/* Nav wrapper: py-2.5 (10px*2) + h-12 (48px) = 68px en document flow */
+const NAV_H = "68px";
+
 export default function Hero() {
   return (
     <section
       className="relative overflow-hidden"
-      style={{ background: "#5170ff", minHeight: "100vh" }}
+      style={{
+        background: "#5170ff",
+        minHeight: "100vh",
+        marginTop: `-${NAV_H}`,
+        paddingTop: NAV_H,
+      }}
     >
       {/* ── Mobile: sello arriba, texto abajo ── */}
       <div className="lg:hidden flex flex-col">
         <div className="flex justify-center items-center pt-8 pb-2">
-          {/* Lavado radial detrás del sello */}
-          <div className="relative">
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "radial-gradient(ellipse at center, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 70%)",
-                borderRadius: "50%",
-              }}
-            />
-            <div style={{ width: "min(80vw, 360px)", height: "min(80vw, 360px)" }}>
-              <BrandSeal size="100%" />
-            </div>
+          <div style={{ width: "min(80vw, 360px)", height: "min(80vw, 360px)" }}>
+            <BrandSeal size="100%" />
           </div>
         </div>
 
@@ -47,21 +44,12 @@ export default function Hero() {
       <div className="hidden lg:grid grid-cols-2" style={{ minHeight: "100vh" }}>
 
         {/* Columna izquierda — sello */}
-        <div className="relative flex items-center justify-center">
-          {/* Lavado radial para separar sello del azul plano */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(ellipse at center, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0) 68%)",
-            }}
-          />
+        <div className="flex items-center justify-center">
           <motion.div
             custom={0}
             variants={fade}
             initial="hidden"
             animate="show"
-            className="relative"
           >
             <div style={{ width: "min(44vw, 85vh)", height: "min(44vw, 85vh)" }}>
               <BrandSeal size="100%" />
