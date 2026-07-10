@@ -34,27 +34,30 @@ const signals: Signal[] = [
   },
 ];
 
+/* Badges como chips planos — colores semánticos de Mundinero */
 const badgeStyle: Record<SignalType, React.CSSProperties> = {
-  Alerta:  { background: "#FF6B6B", color: "#1f1e1d" },
-  Evento:  { background: "#5170ff", color: "#F7F6F3" },
-  Vigilar: { background: "rgba(247,246,243,0.10)", color: "#F7F6F3" },
-  Dato:    { background: "#34D87F", color: "#1f1e1d" },
+  Alerta:  { background: "rgba(255,107,107,0.12)", color: "#FF6B6B", borderColor: "rgba(255,107,107,0.22)" },
+  Evento:  { background: "rgba(81,112,255,0.14)",  color: "#6B87FF", borderColor: "rgba(81,112,255,0.25)" },
+  Vigilar: { background: "rgba(207,204,196,0.08)", color: "#cfccc4", borderColor: "rgba(207,204,196,0.15)" },
+  Dato:    { background: "rgba(52,216,127,0.12)",  color: "#34D87F", borderColor: "rgba(52,216,127,0.22)" },
 };
 
 function SignalRow({ type, title, desc, time }: Signal) {
   return (
     <div className="py-7 grid grid-cols-1 md:grid-cols-[140px_1fr_72px] gap-3 md:gap-8 items-start border-b border-hairline-dark last:border-0 group">
-      <div className="flex items-center gap-3">
+      <div>
         <span
-          className="text-[10px] font-bold tracking-[0.14em] px-2 py-1 uppercase flex-shrink-0 font-sans"
+          className="font-sans text-[10px] font-bold tracking-[0.14em] px-2.5 py-1 uppercase rounded-md border"
           style={badgeStyle[type]}
         >
           {type}
         </span>
       </div>
       <div>
-        <p className="font-serif text-lg md:text-xl font-bold text-crema leading-[1.15] group-hover:text-azuldk transition-colors"
-           style={{ letterSpacing: "-0.01em" }}>
+        <p
+          className="font-serif font-bold text-crema leading-[1.15] group-hover:text-azuldk transition-colors"
+          style={{ fontSize: "clamp(18px, 2vw, 22px)", letterSpacing: "-0.01em" }}
+        >
           {title}
         </p>
         <p className="font-sans text-muted-dark text-sm leading-relaxed mt-1.5">{desc}</p>
@@ -69,8 +72,8 @@ export default function RadarMundinero() {
     <section id="radar" className="px-6 md:px-14 lg:px-20 py-24 border-t border-hairline-dark">
       <div className="max-w-[1400px] mx-auto">
 
-        {/* Heading */}
-        <div className="flex items-end justify-between mb-16">
+        {/* Header */}
+        <div className="flex items-end justify-between mb-14">
           <div>
             <div className="flex items-center gap-3 mb-4">
               <span
@@ -93,7 +96,7 @@ export default function RadarMundinero() {
           </span>
         </div>
 
-        {/* Señales como filas tipográficas */}
+        {/* Filas */}
         <div>
           {signals.map((s, i) => (
             <SignalRow key={i} {...s} />

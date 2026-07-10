@@ -12,51 +12,82 @@ export default function Newsletter() {
   };
 
   return (
-    <section id="newsletter" className="py-20 px-4 bg-azul">
-      <div className="max-w-2xl mx-auto text-center">
-        <span className="text-tinta/55 text-[11px] font-bold tracking-[0.28em] uppercase">
-          Newsletter
-        </span>
-        <h2 className="font-serif text-3xl md:text-5xl font-bold text-tinta mt-2 mb-3 leading-tight">
-          El futuro del dinero en tu inbox
-        </h2>
-        <p className="text-tinta/60 text-sm md:text-base font-medium mb-8 leading-relaxed">
-          Análisis semanal, alertas de mercado y la columna editorial de
-          Mundinero. Gratis. Sin spam. Solo señal.
-        </p>
+    <section id="newsletter" className="px-6 md:px-14 lg:px-20 py-24 border-t border-hairline-dark">
+      <div className="max-w-[1400px] mx-auto">
 
-        {sent ? (
-          <div className="bg-tinta/12 rounded-lg px-6 py-5">
-            <p className="text-tinta font-bold text-lg">✓ ¡Listo! Revisa tu correo.</p>
-            <p className="text-tinta/60 text-sm mt-1">
-              Pronto recibirás la primera edición de Mundinero.
+        {/* Card azul con fondo sólido */}
+        <div
+          className="rounded-2xl p-10 md:p-16"
+          style={{ background: "#5170ff" }}
+        >
+          <div className="max-w-[560px]">
+            <p
+              className="font-sans text-[11px] font-semibold tracking-[0.28em] uppercase mb-4"
+              style={{ color: "rgba(247,246,243,0.55)" }}
+            >
+              Newsletter
+            </p>
+            <h2
+              className="h-serif font-bold leading-[1.0] mb-4"
+              style={{
+                color: "#F7F6F3",
+                fontSize: "clamp(36px, 4.5vw, 64px)",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              El futuro del dinero en tu inbox
+            </h2>
+            <p
+              className="font-sans text-[15px] leading-[1.65] mb-8"
+              style={{ color: "rgba(247,246,243,0.65)" }}
+            >
+              Análisis semanal, alertas de mercado y la columna editorial
+              de Mundinero. Gratis. Sin spam. Solo señal.
+            </p>
+
+            {sent ? (
+              <div
+                className="rounded-xl px-6 py-5"
+                style={{ background: "rgba(31,30,29,0.20)", border: "1px solid rgba(247,246,243,0.15)" }}
+              >
+                <p className="font-sans font-bold text-lg" style={{ color: "#F7F6F3" }}>
+                  ✓ ¡Listo! Revisa tu correo.
+                </p>
+                <p className="font-sans text-sm mt-1" style={{ color: "rgba(247,246,243,0.60)" }}>
+                  Pronto recibirás la primera edición de Mundinero.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="tu@correo.com"
+                  required
+                  className="flex-1 rounded-lg px-4 py-3 font-sans text-sm focus:outline-none transition-colors"
+                  style={{
+                    background: "rgba(31,30,29,0.20)",
+                    border: "1px solid rgba(247,246,243,0.20)",
+                    color: "#F7F6F3",
+                  }}
+                />
+                <button
+                  type="submit"
+                  className="flex-shrink-0 rounded-lg px-6 py-3 font-sans font-bold text-sm transition-opacity hover:opacity-85"
+                  style={{ background: "#1f1e1d", color: "#F7F6F3" }}
+                >
+                  Suscribirse
+                </button>
+              </form>
+            )}
+
+            <p className="font-sans text-xs mt-4" style={{ color: "rgba(247,246,243,0.35)" }}>
+              Sin spam. Cancela cuando quieras.
             </p>
           </div>
-        ) : (
-          <form
-            onSubmit={handleSubmit}
-            className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-          >
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="tu@correo.com"
-              required
-              className="flex-1 bg-tinta/15 border border-tinta/25 rounded px-4 py-3 text-tinta placeholder:text-tinta/40 focus:outline-none focus:border-tinta/60 transition-colors text-sm"
-            />
-            <button
-              type="submit"
-              className="bg-tinta hover:bg-tinta/85 text-crema font-bold px-6 py-3 rounded text-sm tracking-wide transition-colors flex-shrink-0"
-            >
-              Suscribirse
-            </button>
-          </form>
-        )}
+        </div>
 
-        <p className="text-tinta/40 text-xs mt-4">
-          Sin spam. Cancela cuando quieras.
-        </p>
       </div>
     </section>
   );

@@ -17,23 +17,32 @@ const sections = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-crema/10 py-12 px-4">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-          {/* Brand column */}
+    <footer className="border-t border-hairline-dark px-6 md:px-14 lg:px-20 pt-16 pb-10">
+      <div className="max-w-[1400px] mx-auto">
+
+        {/* Top grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
+
+          {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="font-serif text-2xl font-bold text-azuldk">₥</span>
-              <span className="font-serif text-base font-bold tracking-[0.14em] text-crema uppercase">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="font-serif text-2xl font-bold text-azuldk leading-none">₥</span>
+              <span
+                className="font-sans text-[12px] font-bold uppercase text-crema"
+                style={{ letterSpacing: "0.18em" }}
+              >
                 MUNDINERO
               </span>
             </div>
-            <p className="text-crema/40 text-xs leading-relaxed max-w-[180px]">
+            <p className="font-sans text-muted-dark text-xs leading-relaxed max-w-[180px] mb-3">
               El futuro del dinero habla.
               <br />
               Nosotros lo traducimos.
             </p>
-            <p className="text-crema/25 text-[10px] mt-3 tracking-wide">
+            <p
+              className="font-sans text-[10px] font-medium tracking-wide"
+              style={{ color: "rgba(139,136,127,0.55)" }}
+            >
               Por Monexus® · IMPI
             </p>
           </div>
@@ -41,15 +50,15 @@ export default function Footer() {
           {/* Link columns */}
           {sections.map((s) => (
             <div key={s.title}>
-              <h4 className="text-crema/45 text-[10px] font-bold tracking-[0.2em] uppercase mb-3">
+              <h4 className="font-sans text-[10px] font-bold tracking-[0.2em] uppercase text-muted-dark mb-4">
                 {s.title}
               </h4>
-              <ul className="space-y-2">
+              <ul className="space-y-2.5">
                 {s.links.map((l) => (
                   <li key={l}>
                     <Link
                       href="#"
-                      className="text-crema/55 hover:text-crema text-sm transition-colors"
+                      className="font-sans text-soft-dark hover:text-crema text-sm transition-colors"
                     >
                       {l}
                     </Link>
@@ -61,14 +70,15 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-crema/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-crema/30 text-xs">
+        <div className="border-t border-hairline-dark pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="font-sans text-muted-dark text-xs">
             © 2026 Mundinero · Monexus · Todos los derechos reservados
           </p>
-          <p className="text-crema/25 text-[10px] text-center">
+          <p className="font-sans text-xs" style={{ color: "rgba(139,136,127,0.55)" }}>
             La información publicada no constituye asesoría de inversión.
           </p>
         </div>
+
       </div>
     </footer>
   );

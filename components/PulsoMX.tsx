@@ -45,41 +45,44 @@ export default function PulsoMX() {
     n.toLocaleString("en-US", { maximumFractionDigits: 0 });
 
   return (
-    <section id="pulso-mx" className="py-16 px-4 border-t border-crema/10">
-      <div className="max-w-7xl mx-auto">
-        {/* Section header */}
-        <div className="mb-8">
-          <span className="text-crema/50 text-xs font-semibold tracking-[0.22em] uppercase">
+    <section id="pulso-mx" className="px-6 md:px-14 lg:px-20 py-24 border-t border-hairline-dark">
+      <div className="max-w-[1400px] mx-auto">
+
+        {/* Header */}
+        <div className="mb-14">
+          <p className="font-sans text-[11px] font-medium tracking-[0.22em] uppercase text-muted-dark mb-4">
             Indicadores
-          </span>
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-crema mt-1">
+          </p>
+          <h2
+            className="h-serif font-bold text-crema"
+            style={{ fontSize: "clamp(48px, 6vw, 80px)", lineHeight: 0.92, letterSpacing: "-0.02em" }}
+          >
             Pulso MX
           </h2>
         </div>
 
-        {/* 2×2 stats grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+        {/* Stats grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-10">
           {stats.map((s, i) => (
             <div
               key={i}
-              className="border border-crema/10 rounded-lg p-4 hover:border-crema/25 transition-colors"
+              className="rounded-xl bg-surface-dark border border-hairline-dark p-5 hover:border-soft-dark transition-colors"
             >
-              <p className="text-crema/50 text-[11px] font-semibold tracking-widest uppercase mb-2">
+              <p className="font-sans text-[10px] font-semibold tracking-widest uppercase text-muted-dark mb-3">
                 {s.label}
               </p>
-              <p className="font-serif text-2xl md:text-3xl font-bold text-crema">
+              <p
+                className="font-sans font-bold text-crema leading-none tabular-nums"
+                style={{ fontSize: "clamp(22px, 2.5vw, 32px)", fontVariantNumeric: "tabular-nums" }}
+              >
                 {s.value}
               </p>
               {s.change && (
-                <p
-                  className={`text-sm font-semibold mt-1 ${
-                    s.up ? "text-positivo" : "text-negativo"
-                  }`}
-                >
+                <p className={`font-sans text-sm font-semibold mt-2 ${s.up ? "text-positivo" : "text-negativo"}`}>
                   {s.up ? "▲" : "▼"} {s.change}
                 </p>
               )}
-              <p className="text-crema/35 text-[10px] mt-2 leading-relaxed">
+              <p className="font-sans text-muted-dark text-[10px] mt-3 leading-relaxed">
                 {s.sub}
               </p>
             </div>
@@ -87,56 +90,69 @@ export default function PulsoMX() {
         </div>
 
         {/* Calculadora */}
-        <div className="border border-crema/10 rounded-lg p-6 md:p-8">
-          <h3 className="font-serif text-xl md:text-2xl font-bold text-crema mb-1">
-            Calculadora de Remesas
-          </h3>
-          <p className="text-crema/50 text-sm mb-6">
-            ¿Cuánto pierde tu familia en comisiones?
-          </p>
+        <div className="rounded-xl bg-surface-dark border border-hairline-dark p-6 md:p-8">
+          <div className="flex items-start justify-between mb-5">
+            <div>
+              <p className="font-sans text-[10px] font-semibold tracking-widest uppercase text-muted-dark mb-2">
+                Calculadora
+              </p>
+              <h3 className="h-serif text-xl md:text-2xl font-bold text-crema">
+                Costo de las Remesas
+              </h3>
+            </div>
+            <p className="font-sans text-muted-dark text-xs hidden sm:block pt-1">
+              ¿Cuánto pierde tu familia en comisiones?
+            </p>
+          </div>
 
-          <div className="flex items-center gap-3 mb-8 max-w-xs">
-            <span className="text-crema/50 font-semibold text-sm flex-shrink-0">
-              USD $
-            </span>
+          {/* Input */}
+          <div className="flex items-center gap-3 mb-8 max-w-[260px]">
+            <span className="font-sans text-muted-dark text-sm flex-shrink-0">USD $</span>
             <input
               type="number"
               value={usd}
               onChange={(e) => setUsd(e.target.value)}
-              className="flex-1 bg-tinta border border-crema/20 rounded px-3 py-2 text-crema font-semibold text-lg focus:outline-none focus:border-azul transition-colors"
+              className="flex-1 rounded-lg border border-hairline-dark bg-tinta text-crema font-sans font-semibold text-lg px-3 py-2 focus:outline-none focus:border-azuldk transition-colors"
+              style={{ fontVariantNumeric: "tabular-nums" }}
               min="0"
               step="100"
             />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {/* Tradicional */}
-            <div className="border border-negativo/25 rounded-lg p-5 bg-negativo/5">
-              <p className="text-crema/50 text-[11px] font-semibold tracking-widest uppercase mb-3">
-                Tradicional (5.4% comisión)
-              </p>
-              <p className="font-serif text-3xl font-bold text-crema">
-                ${fmt(tradicional)}
-              </p>
-              <p className="text-negativo text-sm font-semibold mt-2">
+          {/* Comparativa */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="rounded-xl border border-hairline-dark p-5">
+              <div className="flex items-center justify-between mb-3">
+                <p className="font-sans text-[10px] font-semibold tracking-widest uppercase text-muted-dark">
+                  Tradicional
+                </p>
+                <span className="font-sans text-[10px] font-bold text-negativo bg-negativo/10 border border-negativo/20 rounded-md px-2 py-0.5">
+                  5.4% comisión
+                </span>
+              </div>
+              <p className="h-serif text-3xl font-bold text-crema tabular-nums">${fmt(tradicional)}</p>
+              <p className="font-sans text-negativo text-sm font-semibold mt-2">
                 Pierdes ${fmt(amount - tradicional)}
               </p>
             </div>
 
-            {/* Stablecoin */}
-            <div className="border border-positivo/25 rounded-lg p-5 bg-positivo/5">
-              <p className="text-crema/50 text-[11px] font-semibold tracking-widest uppercase mb-3">
-                Stablecoin (&lt;1% comisión)
-              </p>
-              <p className="font-serif text-3xl font-bold text-crema">
-                ${fmt(stablecoin)}
-              </p>
-              <p className="text-positivo text-sm font-semibold mt-2">
+            <div className="rounded-xl border border-hairline-dark p-5">
+              <div className="flex items-center justify-between mb-3">
+                <p className="font-sans text-[10px] font-semibold tracking-widest uppercase text-muted-dark">
+                  Stablecoin
+                </p>
+                <span className="font-sans text-[10px] font-bold text-positivo bg-positivo/10 border border-positivo/20 rounded-md px-2 py-0.5">
+                  &lt;1% comisión
+                </span>
+              </div>
+              <p className="h-serif text-3xl font-bold text-crema tabular-nums">${fmt(stablecoin)}</p>
+              <p className="font-sans text-positivo text-sm font-semibold mt-2">
                 Ahorras ${fmt(ahorro)}
               </p>
             </div>
           </div>
         </div>
+
       </div>
     </section>
   );

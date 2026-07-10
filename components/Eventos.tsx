@@ -35,44 +35,62 @@ const eventos = [
 
 export default function Eventos() {
   return (
-    <section id="eventos" className="py-16 px-4 border-t border-crema/10">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-8">
-          <span className="text-crema/50 text-xs font-semibold tracking-[0.22em] uppercase">
+    <section id="eventos" className="px-6 md:px-14 lg:px-20 py-24 border-t border-hairline-dark">
+      <div className="max-w-[1400px] mx-auto">
+
+        {/* Header */}
+        <div className="mb-14">
+          <p className="font-sans text-[11px] font-medium tracking-[0.22em] uppercase text-muted-dark mb-4">
             Agenda
-          </span>
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-crema mt-1">
+          </p>
+          <h2
+            className="h-serif font-bold text-crema"
+            style={{ fontSize: "clamp(48px, 6vw, 80px)", lineHeight: 0.92, letterSpacing: "-0.02em" }}
+          >
             Eventos
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {eventos.map((e, i) => (
             <div
               key={i}
-              className="border border-crema/10 rounded-lg p-5 hover:border-crema/25 transition-colors"
+              className="rounded-xl bg-surface-dark border border-hairline-dark p-5 flex flex-col gap-3 hover:border-soft-dark transition-colors"
             >
-              <div className="flex items-start justify-between mb-4">
+              {/* Date + type */}
+              <div className="flex items-start justify-between">
                 <div>
-                  <p className="font-serif text-3xl font-bold text-azuldk leading-none">
+                  <p
+                    className="h-serif font-bold text-azuldk leading-none"
+                    style={{ fontSize: "clamp(24px, 2.5vw, 30px)" }}
+                  >
                     {e.date}
                   </p>
-                  <p className="text-crema/40 text-[10px] font-semibold tracking-wide mt-0.5">
+                  <p className="font-sans text-muted-dark text-[10px] font-medium tracking-wide mt-0.5">
                     {e.year}
                   </p>
                 </div>
-                <span className="text-[10px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-sm bg-crema/10 text-crema/65">
+                <span className="font-sans text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-md border border-hairline-dark text-muted-dark">
                   {e.type}
                 </span>
               </div>
-              <h3 className="font-serif text-base font-bold text-crema leading-snug mb-1">
-                {e.name}
-              </h3>
-              <p className="text-crema/40 text-[11px] font-medium mb-2">{e.org}</p>
-              <p className="text-crema/50 text-xs leading-relaxed">{e.detail}</p>
+
+              {/* Divider */}
+              <div className="border-t border-hairline-dark" />
+
+              {/* Content */}
+              <div>
+                <h3 className="font-serif text-base font-bold text-crema leading-snug mb-1">
+                  {e.name}
+                </h3>
+                <p className="font-sans text-muted-dark text-[11px] font-medium mb-2">{e.org}</p>
+                <p className="font-sans text-soft-dark text-xs leading-relaxed">{e.detail}</p>
+              </div>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );
