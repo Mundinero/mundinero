@@ -1,6 +1,7 @@
 "use client";
 
 import { Fragment } from "react";
+import GraficaBanxico from "./GraficaBanxico";
 
 const notaPrincipal = {
   kicker: "Política Monetaria",
@@ -14,12 +15,6 @@ const notaPrincipal = {
   ],
   lectura: "5 min",
   actualizado: "hace 18 min",
-};
-
-const mercadoPredice = {
-  pregunta: "¿Bajará Banxico al menos 50pb adicionales antes de octubre?",
-  probabilidad: "68",
-  fuente: "Polymarket",
 };
 
 const calculadoras = [
@@ -127,41 +122,8 @@ export default function PortadaGrid() {
           {/* ── Rail derecho ──────────────────────────────── */}
           <aside className="flex flex-col gap-7 lg:pl-12">
 
-            {/* El mercado predice */}
-            <div>
-              <p
-                className="font-sans font-bold uppercase mb-3"
-                style={{ fontSize: "9px", letterSpacing: "0.22em", color: "var(--color-muted-dark)" }}
-              >
-                El mercado predice
-              </p>
-              <p
-                className="font-sans leading-snug mb-3"
-                style={{ fontSize: "13px", color: "var(--color-soft-dark)" }}
-              >
-                {mercadoPredice.pregunta}
-              </p>
-              <p
-                className="h-serif font-bold"
-                style={{
-                  fontSize: "clamp(56px, 7vw, 80px)",
-                  lineHeight: 0.95,
-                  letterSpacing: "-0.03em",
-                  color: "var(--color-crema)",
-                }}
-              >
-                {mercadoPredice.probabilidad}
-                <span style={{ fontSize: "0.42em", color: "var(--color-muted-dark)", letterSpacing: 0 }}>
-                  %
-                </span>
-              </p>
-              <p
-                className="font-sans uppercase mt-2"
-                style={{ fontSize: "9px", letterSpacing: "0.18em", color: "var(--color-muted-dark)" }}
-              >
-                Probabilidad · {mercadoPredice.fuente}
-              </p>
-            </div>
+            {/* El mercado predice — datos en vivo de Polymarket */}
+            <GraficaBanxico />
 
             <div className="h-px bg-hairline-dark" />
 
