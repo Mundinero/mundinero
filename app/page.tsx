@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import RadarMundinero from "@/components/RadarMundinero";
 import ArticulosGrid from "@/components/ArticulosGrid";
 import PulsoMX from "@/components/PulsoMX";
+import Calculadoras from "@/components/Calculadoras";
 import LaColumna from "@/components/LaColumna";
 import Eventos from "@/components/Eventos";
 import Newsletter from "@/components/Newsletter";
@@ -19,6 +20,7 @@ export default function Home() {
         <RadarMundinero />
         <ArticulosGrid />
         <PulsoMX />
+        <Calculadoras />
         <LaColumna />
         <Eventos />
         <Newsletter />

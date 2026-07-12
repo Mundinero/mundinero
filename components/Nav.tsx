@@ -4,11 +4,12 @@ import Link from "next/link";
 import { useState } from "react";
 
 const links = [
-  { label: "Noticias",  href: "#noticias"  },
-  { label: "Radar",     href: "#radar"      },
-  { label: "Pulso MX",  href: "#pulso-mx"   },
-  { label: "Columna",   href: "#columna"    },
-  { label: "Eventos",   href: "#eventos"    },
+  { label: "Noticias",     href: "#noticias"     },
+  { label: "Radar",        href: "#radar"        },
+  { label: "Pulso MX",     href: "#pulso-mx"     },
+  { label: "Columna",      href: "#columna"      },
+  { label: "Calculadoras", href: "#calculadoras" },
+  { label: "Eventos",      href: "#eventos"      },
 ];
 
 export default function Nav() {
