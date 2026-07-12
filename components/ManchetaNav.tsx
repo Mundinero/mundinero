@@ -86,20 +86,27 @@ export default function ManchetaNav() {
           <div className="flex items-center h-11 gap-6">
 
             {/* M simplificada — visible al hacer scroll, sin anillo de texto */}
+            {/* background-size 84px sobre contenedor 30px = zoom ×2.8 que
+                recorta el ~31% de padding transparente del PNG a cada lado */}
             <div
               className="flex items-center flex-shrink-0 overflow-hidden transition-all duration-200"
               style={{
-                width:        scrolled ? "44px" : "0px",
+                width:        scrolled ? "42px" : "0px",
                 opacity:      scrolled ? 1 : 0,
                 paddingRight: scrolled ? "12px" : "0px",
                 borderRight:  scrolled ? "1px solid var(--color-hairline-dark)" : "none",
               }}
             >
               <Link href="/" aria-label="Mundinero">
-                <img
-                  src="/mun-2.png"
-                  alt="M"
-                  style={{ width: "26px", height: "26px", objectFit: "contain" }}
+                <div
+                  style={{
+                    width:              "30px",
+                    height:             "30px",
+                    backgroundImage:    "url('/mun-2.png')",
+                    backgroundSize:     "84px 84px",
+                    backgroundPosition: "center",
+                    backgroundRepeat:   "no-repeat",
+                  }}
                 />
               </Link>
             </div>
