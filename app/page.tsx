@@ -1,6 +1,8 @@
 import Ticker from "@/components/Ticker";
-import Nav from "@/components/Nav";
-import Hero from "@/components/Hero";
+import ManchetaNav from "@/components/ManchetaNav";
+import PortadaGrid from "@/components/PortadaGrid";
+import Breves from "@/components/Breves";
+import NoticiasDia from "@/components/NoticiasDia";
 import RadarMundinero from "@/components/RadarMundinero";
 import ArticulosGrid from "@/components/ArticulosGrid";
 import PulsoMX from "@/components/PulsoMX";
@@ -14,9 +16,11 @@ export default function Home() {
   return (
     <>
       <Ticker />
-      <Nav />
+      <ManchetaNav />
       <main>
-        <Hero />
+        <PortadaGrid />
+        <Breves />
+        <NoticiasDia />
         <RadarMundinero />
         <ArticulosGrid />
         <PulsoMX />
