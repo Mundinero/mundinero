@@ -111,6 +111,33 @@ h1, h2, h3 {
   font-family: var(--font-serif);
 }
 
+/* ── Artículo: capitular (drop cap) ─────────────────────────────────────── */
+/* Fraunces 600, 3 líneas de alto, flota a la izquierda del primer párrafo  */
+.prose-drop-cap::first-letter {
+  font-family: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+  font-weight: 600;
+  font-variation-settings: 'opsz' 60, 'SOFT' 0, 'WONK' 0;
+  float: left;
+  font-size: 5.8em;
+  line-height: 0.86;
+  margin-right: 0.07em;
+  margin-top: 0.05em;
+  color: var(--color-tinta);
+}
+
+/* ── Artículo: link en cuerpo de lectura (siempre visible) ──────────────── */
+/* En lectura larga el link se declara, no se esconde.                       */
+.link-body {
+  color: #3A57E8;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: text-decoration-thickness 120ms ease-out;
+}
+.link-body:hover {
+  text-decoration-thickness: 2px;
+}
+
 /* ── Cifras tabulares ───────────────────────────────────────────────────── */
 .tnum {
   font-variant-numeric: tabular-nums;
