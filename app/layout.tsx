@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ThemeProvider from "@/components/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Mundinero — El futuro del dinero habla.",
@@ -12,8 +13,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="dark">
+    <html lang="es" data-theme="light">
       <head>
+        {/* Sin FOUC: aplica tema guardado antes de pintar */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem('mundinero-theme');document.documentElement.setAttribute('data-theme',t||'light');}catch(e){}`,
+          }}
+        />
         {/* Fraunces variable — WONK 0 / SOFT 0 / opsz range 9–144 */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -23,7 +30,9 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-tinta text-crema min-h-screen antialiased font-sans">
-        {children}
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

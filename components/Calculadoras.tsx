@@ -81,9 +81,9 @@ function RowDeduccion({
   label: string; hint?: string; value: number; color: "negativo" | "positivo" | "crema";
 }) {
   const colorMap = {
-    negativo: "#FF6B6B",
-    positivo: "#34D87F",
-    crema:    "rgba(207,204,196,0.8)",
+    negativo: "var(--color-negativo)",
+    positivo: "var(--color-positivo)",
+    crema:    "var(--color-soft-dark)",
   };
   return (
     <div className="flex items-center justify-between py-3 border-b border-hairline-dark">
@@ -170,8 +170,8 @@ export default function Calculadoras() {
                     onClick={() => setPeriodo(per.key)}
                     className="flex-1 py-2.5 font-sans text-xs font-semibold transition-all"
                     style={{
-                      background: periodo === per.key ? "#F7F6F3" : "transparent",
-                      color: periodo === per.key ? "#1f1e1d" : "#8b887f",
+                      background: periodo === per.key ? "var(--color-crema)" : "transparent",
+                      color: periodo === per.key ? "var(--color-tinta)" : "var(--color-muted-dark)",
                     }}
                   >
                     {per.label}

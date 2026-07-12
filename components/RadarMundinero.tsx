@@ -36,10 +36,10 @@ const signals: Signal[] = [
 
 /* Badges como chips planos — colores semánticos de Mundinero */
 const badgeStyle: Record<SignalType, React.CSSProperties> = {
-  Alerta:  { background: "rgba(255,107,107,0.12)", color: "#FF6B6B", borderColor: "rgba(255,107,107,0.22)" },
-  Evento:  { background: "rgba(81,112,255,0.14)",  color: "#6B87FF", borderColor: "rgba(81,112,255,0.25)" },
-  Vigilar: { background: "rgba(207,204,196,0.08)", color: "#cfccc4", borderColor: "rgba(207,204,196,0.15)" },
-  Dato:    { background: "rgba(52,216,127,0.12)",  color: "#34D87F", borderColor: "rgba(52,216,127,0.22)" },
+  Alerta:  { background: "rgba(255,107,107,0.12)", color: "var(--color-negativo)", borderColor: "rgba(255,107,107,0.22)" },
+  Evento:  { background: "rgba(81,112,255,0.14)",  color: "var(--color-azuldk)",   borderColor: "rgba(81,112,255,0.25)" },
+  Vigilar: { background: "rgba(207,204,196,0.08)", color: "var(--color-muted-dark)", borderColor: "rgba(207,204,196,0.15)" },
+  Dato:    { background: "rgba(52,216,127,0.12)",  color: "var(--color-positivo)", borderColor: "rgba(52,216,127,0.22)" },
 };
 
 function SignalRow({ type, title, desc, time }: Signal) {

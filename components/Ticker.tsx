@@ -23,19 +23,19 @@ const labelStyle: React.CSSProperties = {
   fontWeight: 500,
   textTransform: "uppercase",
   letterSpacing: "0.04em",
-  color: "rgba(247,246,243,0.45)",
+  color: "var(--color-muted-dark)",
 };
 
 const valueStyle: React.CSSProperties = {
   fontSize: "11.5px",
   fontWeight: 600,
-  color: "rgba(247,246,243,0.9)",
+  color: "var(--color-crema)",
 };
 
 const deltaStyle = (up: boolean): React.CSSProperties => ({
   fontSize: "11.5px",
   fontWeight: 600,
-  color: up ? "#34D87F" : "#FF6B6B",
+  color: up ? "var(--color-positivo)" : "var(--color-negativo)",
 });
 
 export default function Ticker() {
@@ -51,7 +51,7 @@ export default function Ticker() {
             fontSize: "10px",
             fontWeight: 700,
             letterSpacing: "0.22em",
-            color: "#6B87FF",
+            color: "var(--color-azuldk)",
             textTransform: "uppercase",
           }}
         >

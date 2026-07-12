@@ -100,11 +100,27 @@
   50%       { opacity: 0.2; }
 }
 
+/* ── Modo claro — sobreescribe tokens para invertir la superficie ────────── */
+/* Tailwind v4 genera bg-tinta como background-color: var(--color-tinta),    */
+/* así que cambiar el token aquí adapta TODOS los utilities automáticamente. */
+[data-theme="light"] {
+  --color-tinta:         #F7F6F3;   /* bg principal ahora es crema */
+  --color-crema:         #1f1e1d;   /* texto principal ahora es tinta */
+  --color-surface-dark:  #ECEAE5;
+  --color-hairline-dark: #DEDBD4;
+  --color-muted-dark:    #5F5E5A;
+  --color-soft-dark:     #B8B4AC;
+  --color-azuldk:        #3A57E8;
+  --color-positivo:      #0B6B38;
+  --color-negativo:      #A62820;
+}
+
 /* ── Base ────────────────────────────────────────────────────────────────── */
 body {
   background-color: var(--color-tinta);
   color: var(--color-crema);
   font-family: var(--font-sans);
+  transition: background-color 220ms ease-out, color 220ms ease-out;
 }
 
 h1, h2, h3 {

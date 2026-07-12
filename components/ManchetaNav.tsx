@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { useTheme } from "./ThemeProvider";
 
 const navLinks = [
   { label: "Noticias",     href: "#noticias"     },
@@ -23,6 +24,8 @@ function getMXDate(): string {
 export default function ManchetaNav() {
   const [scrolled, setScrolled] = useState(false);
   const manchetaRef = useRef<HTMLElement>(null);
+  const { theme, toggle } = useTheme();
+  const isLight = theme === "light";
 
   useEffect(() => {
     const el = manchetaRef.current;
@@ -53,17 +56,20 @@ export default function ManchetaNav() {
             <span className="flex-1 h-px bg-hairline-dark" />
           </div>
 
-          {/* Wordmark principal */}
-          <h1
-            className="h-serif font-bold text-center leading-none"
-            style={{
-              color: "var(--color-crema)",
-              fontSize: "clamp(72px, 13vw, 152px)",
-              letterSpacing: "-0.03em",
-            }}
-          >
-            Mundinero
-          </h1>
+          {/* Wordmark principal — SVG con fill:white, invertido en modo claro */}
+          <div className="flex justify-center">
+            <img
+              src="/mundinero_logo.svg"
+              alt="Mundinero"
+              style={{
+                height:     "clamp(60px, 10vw, 128px)",
+                maxWidth:   "90%",
+                objectFit:  "contain",
+                filter:     isLight ? "invert(0.88)" : "none",
+                transition: "filter 220ms ease-out",
+              }}
+            />
+          </div>
 
           {/* Folio: fecha en timezone Mexico City · descripción · por */}
           <p
@@ -76,24 +82,21 @@ export default function ManchetaNav() {
           </p>
 
           {/* Filete doble */}
-          <div style={{ height: "2px", background: "rgba(247,246,243,0.78)" }} />
+          <div style={{ height: "2px", background: "var(--color-crema)", opacity: 0.78 }} />
           <div style={{ height: "3px" }} />
           <div className="h-px bg-hairline-dark" />
         </div>
       </header>
 
       {/* ── Barra de secciones ───────────────────────────────────── */}
-      {/* sticky top-9 para pegarse bajo el ticker (h-9 = 36px)      */}
-      {/* Separación mediante hairline muy tenue — fondo tinta continuo */}
       <nav
         className="sticky top-9 z-40 bg-tinta fade-rise"
-        style={{ borderBottom: "0.5px solid rgba(247,246,243,0.18)", animationDelay: "60ms" }}
+        style={{ borderBottom: "0.5px solid var(--color-hairline-dark)", animationDelay: "60ms" }}
       >
         <div className="max-w-[1400px] mx-auto px-6 md:px-14 lg:px-20">
           <div className="flex items-center h-11 gap-6">
 
             {/* M simplificada — visible al hacer scroll */}
-            {/* background-size 84px sobre contenedor 30px = zoom ×2.8 */}
             <div
               className="flex items-center flex-shrink-0 overflow-hidden transition-all duration-200"
               style={{
@@ -112,6 +115,8 @@ export default function ManchetaNav() {
                     backgroundSize:     "84px 84px",
                     backgroundPosition: "center",
                     backgroundRepeat:   "no-repeat",
+                    filter:             isLight ? "invert(0.88)" : "none",
+                    transition:         "filter 220ms ease-out",
                   }}
                 />
               </Link>
@@ -143,6 +148,29 @@ export default function ManchetaNav() {
             >
               Suscribirse <span style={{ color: "var(--color-azul)", marginLeft: "4px" }}>→</span>
             </Link>
+
+            {/* Toggle claro/oscuro */}
+            <button
+              onClick={toggle}
+              aria-label={isLight ? "Cambiar a modo oscuro" : "Cambiar a modo claro"}
+              className="flex-shrink-0 font-sans"
+              style={{
+                fontSize:      "10px",
+                fontWeight:    600,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color:         "var(--color-muted-dark)",
+                background:    "transparent",
+                border:        "0.5px solid var(--color-hairline-dark)",
+                borderRadius:  "20px",
+                padding:       "3px 9px",
+                cursor:        "pointer",
+                lineHeight:    1.6,
+                transition:    "color 150ms ease-out, border-color 150ms ease-out",
+              }}
+            >
+              {isLight ? "◑" : "☀"}
+            </button>
           </div>
         </div>
       </nav>
