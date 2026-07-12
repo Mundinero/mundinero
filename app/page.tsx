@@ -16,6 +16,8 @@ export default function Home() {
   return (
     <>
       <Ticker />
+      {/* Espaciador h-9 = 36px para compensar el Ticker fixed */}
+      <div className="h-9" />
       <ManchetaNav />
       <main>
         <PortadaGrid />

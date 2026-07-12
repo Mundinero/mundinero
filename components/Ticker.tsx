@@ -42,7 +42,7 @@ export default function Ticker() {
   const doubled = [...items, ...items];
 
   return (
-    <div className="sticky top-0 z-50 bg-tinta border-b border-hairline-dark h-9 flex items-stretch overflow-hidden">
+    <div className="fixed top-0 left-0 right-0 z-50 bg-tinta border-b border-hairline-dark h-9 flex items-stretch overflow-hidden">
       {/* Badge EN VIVO */}
       <div className="flex-shrink-0 px-3 flex items-center border-r border-hairline-dark">
         <span
