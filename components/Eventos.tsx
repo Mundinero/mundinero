@@ -81,7 +81,7 @@ export default function Eventos() {
 
               {/* Content */}
               <div>
-                <h3 className="font-serif text-base font-bold text-crema leading-snug mb-1">
+                <h3 className="h-serif text-base font-bold text-crema leading-snug mb-1">
                   {e.name}
                 </h3>
                 <p className="font-sans text-muted-dark text-[11px] font-medium mb-2">{e.org}</p>

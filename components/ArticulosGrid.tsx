@@ -87,7 +87,7 @@ export default function ArticulosGrid() {
               {/* Titular + meta */}
               <div>
                 <h3
-                  className="font-serif font-bold text-crema leading-[1.1] group-hover:text-azuldk transition-colors"
+                  className="h-serif font-bold text-crema leading-[1.1] group-hover:text-azuldk transition-colors"
                   style={{ fontSize: "clamp(20px, 2.2vw, 28px)", letterSpacing: "-0.01em" }}
                 >
                   {a.title}

@@ -73,7 +73,7 @@ export default function NoticiasDia() {
                 {n.cat}
               </p>
               <h3
-                className="font-serif font-bold leading-snug"
+                className="h-serif font-bold leading-snug"
                 style={{ fontSize: "14px", color: "var(--color-crema)" }}
               >
                 {n.titular}

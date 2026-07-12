@@ -57,10 +57,10 @@
   --font-sans:  'Satoshi', 'Inter', system-ui, sans-serif;
 }
 
-/* ── Titular serif optimizado (opsz alto, WONK 0, SOFT 0) ───────────────── */
+/* ── Titular serif optimizado (opsz 28 = corte Text, robusto y sobrio) ─── */
 .h-serif {
   font-family: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
-  font-variation-settings: 'opsz' 144, 'SOFT' 0, 'WONK' 0;
+  font-variation-settings: 'opsz' 28, 'SOFT' 0, 'WONK' 0;
   letter-spacing: -0.01em;
 }
 

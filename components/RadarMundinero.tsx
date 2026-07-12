@@ -55,7 +55,7 @@ function SignalRow({ type, title, desc, time }: Signal) {
       </div>
       <div>
         <p
-          className="font-serif font-bold text-crema leading-[1.15] group-hover:text-azuldk transition-colors"
+          className="h-serif font-bold text-crema leading-[1.15] group-hover:text-azuldk transition-colors"
           style={{ fontSize: "clamp(18px, 2vw, 22px)", letterSpacing: "-0.01em" }}
         >
           {title}
