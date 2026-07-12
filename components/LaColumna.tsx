@@ -1,3 +1,5 @@
+import SelloMundinero from "./SelloMundinero";
+
 export default function LaColumna() {
   return (
     <section id="columna" className="px-6 md:px-14 lg:px-20 py-24 border-t border-hairline-dark">
@@ -67,6 +69,18 @@ export default function LaColumna() {
           </div>
 
         </div>
+
+        {/* Colofón */}
+        <div className="flex flex-col items-center gap-3 mt-16 pt-10 border-t border-hairline-dark">
+          <SelloMundinero size={56} rotate="entry" />
+          <p
+            className="font-sans font-medium uppercase"
+            style={{ fontSize: "9px", letterSpacing: "0.24em", color: "var(--color-muted-dark)" }}
+          >
+            Mundinero · 2026
+          </p>
+        </div>
+
       </div>
     </section>
   );

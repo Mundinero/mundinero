@@ -85,24 +85,22 @@ export default function ManchetaNav() {
         <div className="max-w-[1400px] mx-auto px-6 md:px-14 lg:px-20">
           <div className="flex items-center h-11 gap-6">
 
-            {/* Wordmark compacto — visible al hacer scroll */}
+            {/* M simplificada — visible al hacer scroll, sin anillo de texto */}
             <div
-              className="flex items-center gap-2.5 flex-shrink-0 overflow-hidden transition-all duration-200"
+              className="flex items-center flex-shrink-0 overflow-hidden transition-all duration-200"
               style={{
-                maxWidth: scrolled ? "160px" : "0px",
-                opacity: scrolled ? 1 : 0,
-                paddingRight: scrolled ? "16px" : "0px",
-                borderRight: scrolled ? "1px solid var(--color-hairline-dark)" : "none",
-                marginRight: scrolled ? "4px" : "0px",
+                width:        scrolled ? "44px" : "0px",
+                opacity:      scrolled ? 1 : 0,
+                paddingRight: scrolled ? "12px" : "0px",
+                borderRight:  scrolled ? "1px solid var(--color-hairline-dark)" : "none",
               }}
             >
-              <Link href="/" className="flex items-center gap-1.5 whitespace-nowrap">
-                <span
-                  className="h-serif font-bold"
-                  style={{ fontSize: "16px", color: "var(--color-crema)" }}
-                >
-                  Mundinero
-                </span>
+              <Link href="/" aria-label="Mundinero">
+                <img
+                  src="/mun-2.png"
+                  alt="M"
+                  style={{ width: "26px", height: "26px", objectFit: "contain" }}
+                />
               </Link>
             </div>
 

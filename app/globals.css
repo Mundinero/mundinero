@@ -80,6 +80,20 @@
   to   { transform: rotate(-360deg); }
 }
 
+/* ── SelloMundinero — animaciones CSS ───────────────────────────────────── */
+/* continuous: rotación permanente lenta (pausa si reduced-motion)          */
+.sello-cw  { animation: spin-cw  25s linear infinite; }
+.sello-ccw { animation: spin-ccw 25s linear infinite; }
+
+/* entry: una vuelta de entrada, ease-out (colofón de artículo)             */
+.sello-cw-entry  { animation: spin-cw  1.6s cubic-bezier(0.22, 1, 0.36, 1) 1 both; }
+.sello-ccw-entry { animation: spin-ccw 1.6s cubic-bezier(0.22, 1, 0.36, 1) 1 both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sello-cw, .sello-ccw,
+  .sello-cw-entry, .sello-ccw-entry { animation: none; }
+}
+
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50%       { opacity: 0.2; }

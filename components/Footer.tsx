@@ -1,4 +1,5 @@
 import Link from "next/link";
+import SelloMundinero from "./SelloMundinero";
 
 const sections = [
   {
@@ -24,27 +25,27 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
 
           {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="font-serif text-2xl font-bold text-azuldk leading-none">₥</span>
-              <span
-                className="font-sans text-[12px] font-bold uppercase text-crema"
-                style={{ letterSpacing: "0.18em" }}
+          <div className="col-span-2 md:col-span-1 flex flex-col gap-4">
+            <SelloMundinero size={96} rotate="continuous" />
+            <div>
+              <p
+                className="font-sans font-bold uppercase text-crema mb-1"
+                style={{ fontSize: "12px", letterSpacing: "0.18em" }}
               >
                 MUNDINERO
-              </span>
+              </p>
+              <p className="font-sans text-muted-dark text-xs leading-relaxed max-w-[180px] mb-2">
+                El futuro del dinero habla.
+                <br />
+                Nosotros lo traducimos.
+              </p>
+              <p
+                className="font-sans text-[10px] font-medium tracking-wide"
+                style={{ color: "rgba(139,136,127,0.55)" }}
+              >
+                Por Monexus® · IMPI
+              </p>
             </div>
-            <p className="font-sans text-muted-dark text-xs leading-relaxed max-w-[180px] mb-3">
-              El futuro del dinero habla.
-              <br />
-              Nosotros lo traducimos.
-            </p>
-            <p
-              className="font-sans text-[10px] font-medium tracking-wide"
-              style={{ color: "rgba(139,136,127,0.55)" }}
-            >
-              Por Monexus® · IMPI
-            </p>
           </div>
 
           {/* Link columns */}
