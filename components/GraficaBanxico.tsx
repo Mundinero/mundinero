@@ -127,13 +127,12 @@ export default function GraficaBanxico() {
 
       {/* Probabilidad dominante */}
       <p
-        className="h-serif font-bold"
+        className="h-serif font-bold tnum"
         style={{
-          fontSize:          "clamp(44px, 5.5vw, 66px)",
-          lineHeight:        0.95,
-          letterSpacing:     "-0.03em",
-          color:             "var(--color-crema)",
-          fontVariantNumeric: "tabular-nums",
+          fontSize:      "clamp(44px, 5.5vw, 66px)",
+          lineHeight:    0.95,
+          letterSpacing: "-0.03em",
+          color:         "var(--color-crema)",
         }}
       >
         {currentPct}
@@ -213,7 +212,7 @@ export default function GraficaBanxico() {
         {[startLabel, endLabel].map(l => (
           <span
             key={l}
-            className="font-sans"
+            className="font-sans tnum"
             style={{ fontSize: "9px", color: "var(--color-muted-dark)", letterSpacing: "0.04em" }}
           >
             {l}
@@ -249,7 +248,7 @@ export default function GraficaBanxico() {
               />
             </div>
             <span
-              className="font-sans tabular-nums flex-shrink-0"
+              className="font-sans tnum flex-shrink-0"
               style={{ fontSize: "10px", color: "var(--color-soft-dark)", width: "30px", textAlign: "right" }}
             >
               {fmtPct(o.price)}
@@ -260,7 +259,7 @@ export default function GraficaBanxico() {
 
       {/* Footer meta */}
       <p
-        className="font-sans"
+        className="font-sans tnum"
         style={{ fontSize: "9px", color: "rgba(139,136,127,0.55)", letterSpacing: "0.06em" }}
       >
         Vol {totalVol} USDC · Polymarket · Cierra 6 ago

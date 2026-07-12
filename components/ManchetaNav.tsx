@@ -12,17 +12,24 @@ const navLinks = [
   { label: "Eventos",      href: "#eventos"      },
 ];
 
+function getMXDate(): string {
+  const s = new Intl.DateTimeFormat("es-MX", {
+    weekday: "long", year: "numeric", month: "long", day: "numeric",
+    timeZone: "America/Mexico_City",
+  }).format(new Date());
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
 export default function ManchetaNav() {
   const [scrolled, setScrolled] = useState(false);
   const manchetaRef = useRef<HTMLElement>(null);
 
-  // Detecta cuando la mancheta sale de la vista, usando IntersectionObserver
   useEffect(() => {
     const el = manchetaRef.current;
     if (!el) return;
     const obs = new IntersectionObserver(
       ([entry]) => setScrolled(!entry.isIntersecting),
-      { threshold: 0, rootMargin: "-44px 0px 0px 0px" } // compensa ticker h-9 + nav h-11
+      { threshold: 0, rootMargin: "-44px 0px 0px 0px" }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -31,7 +38,7 @@ export default function ManchetaNav() {
   return (
     <>
       {/* ── Mancheta ────────────────────────────────────────────── */}
-      <header ref={manchetaRef} className="bg-tinta pt-7 pb-0">
+      <header ref={manchetaRef} className="bg-tinta pt-7 pb-0 fade-rise">
         <div className="max-w-[1400px] mx-auto px-6 md:px-14 lg:px-20">
 
           {/* Ornamento lateral + tagline */}
@@ -58,15 +65,13 @@ export default function ManchetaNav() {
             Mundinero
           </h1>
 
-          {/* Folio: fecha · descripción · por */}
+          {/* Folio: fecha en timezone Mexico City · descripción · por */}
           <p
-            className="font-sans text-center mt-3 mb-5"
+            className="font-sans text-center mt-3 mb-5 tnum"
             style={{ fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--color-muted-dark)" }}
             suppressHydrationWarning
           >
-            {new Date().toLocaleDateString("es-MX", {
-              weekday: "long", year: "numeric", month: "long", day: "numeric",
-            })}
+            {getMXDate()}
             &nbsp;·&nbsp;Medio financiero editorial de México y el mundo&nbsp;·&nbsp;Por Monexus®
           </p>
 
@@ -78,16 +83,17 @@ export default function ManchetaNav() {
       </header>
 
       {/* ── Barra de secciones ───────────────────────────────────── */}
-      {/* sticky top-9 para pegarse bajo el ticker (h-9 = 36px) */}
+      {/* sticky top-9 para pegarse bajo el ticker (h-9 = 36px)      */}
+      {/* Separación mediante hairline muy tenue — fondo tinta continuo */}
       <nav
-        className="sticky top-9 z-40 bg-tinta border-b border-hairline-dark"
+        className="sticky top-9 z-40 bg-tinta fade-rise"
+        style={{ borderBottom: "0.5px solid rgba(247,246,243,0.18)", animationDelay: "60ms" }}
       >
         <div className="max-w-[1400px] mx-auto px-6 md:px-14 lg:px-20">
           <div className="flex items-center h-11 gap-6">
 
-            {/* M simplificada — visible al hacer scroll, sin anillo de texto */}
-            {/* background-size 84px sobre contenedor 30px = zoom ×2.8 que
-                recorta el ~31% de padding transparente del PNG a cada lado */}
+            {/* M simplificada — visible al hacer scroll */}
+            {/* background-size 84px sobre contenedor 30px = zoom ×2.8 */}
             <div
               className="flex items-center flex-shrink-0 overflow-hidden transition-all duration-200"
               style={{

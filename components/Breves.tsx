@@ -11,10 +11,11 @@ const breves = [
 export default function Breves() {
   return (
     <div
-      className="bg-tinta px-6 md:px-14 lg:px-20 py-3.5"
+      className="bg-tinta px-6 md:px-14 lg:px-20 py-3.5 fade-rise"
       style={{
-        borderTop:    "1px solid var(--color-hairline-dark)",
-        borderBottom: "1px solid var(--color-hairline-dark)",
+        borderTop:      "1px solid var(--color-hairline-dark)",
+        borderBottom:   "1px solid var(--color-hairline-dark)",
+        animationDelay: "240ms",
       }}
     >
       <div className="max-w-[1400px] mx-auto flex flex-wrap items-center gap-y-1.5">

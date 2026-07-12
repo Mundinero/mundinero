@@ -35,7 +35,10 @@ export default function PortadaGrid() {
         <div className="grid grid-cols-1 lg:grid-cols-[1.7fr_1fr] gap-10 lg:gap-0 items-start">
 
           {/* ── Nota principal ───────────────────────────── */}
-          <article className="lg:pr-14 lg:border-r lg:border-hairline-dark">
+          <article
+            className="lg:pr-14 lg:border-r lg:border-hairline-dark fade-rise"
+            style={{ animationDelay: "120ms" }}
+          >
             <p
               className="font-sans font-bold uppercase mb-3"
               style={{ fontSize: "10px", letterSpacing: "0.22em", color: "var(--color-azul)" }}
@@ -62,10 +65,10 @@ export default function PortadaGrid() {
               {notaPrincipal.bajada}
             </p>
 
-            {/* ¿Cómo te afecta? */}
+            {/* ¿Cómo te afecta? — azuldk 0.06 + bullet 5px centrado en cap-height */}
             <div
               className="mt-6 rounded-r-lg px-5 py-4"
-              style={{ background: "rgba(81,112,255,0.09)", borderLeft: "2px solid var(--color-azul)" }}
+              style={{ background: "rgba(107,135,255,0.06)", borderLeft: "2px solid var(--color-azul)" }}
             >
               <p
                 className="font-sans font-bold uppercase mb-3"
@@ -75,11 +78,16 @@ export default function PortadaGrid() {
               </p>
               <ul className="flex flex-col gap-2">
                 {notaPrincipal.impactos.map((imp, i) => (
-                  <li key={i} className="flex gap-2.5 items-start">
+                  <li key={i} className="flex gap-3 items-start">
                     <span
-                      className="font-sans font-bold flex-shrink-0"
-                      style={{ color: "var(--color-azuldk)", marginTop: "1px" }}
-                    >·</span>
+                      className="flex-shrink-0 rounded-full"
+                      style={{
+                        width: "5px",
+                        height: "5px",
+                        background: "var(--color-azuldk)",
+                        marginTop: "0.35em",
+                      }}
+                    />
                     <span
                       className="font-sans leading-snug"
                       style={{ fontSize: "13px", color: "var(--color-soft-dark)" }}
@@ -109,7 +117,7 @@ export default function PortadaGrid() {
                     />
                   )}
                   <span
-                    className="font-sans font-medium"
+                    className="font-sans font-medium tnum"
                     style={{ fontSize: "10px", letterSpacing: "0.06em", color: "var(--color-muted-dark)" }}
                   >
                     {txt}
@@ -120,7 +128,10 @@ export default function PortadaGrid() {
           </article>
 
           {/* ── Rail derecho ──────────────────────────────── */}
-          <aside className="flex flex-col gap-7 lg:pl-12">
+          <aside
+            className="flex flex-col gap-7 lg:pl-12 fade-rise"
+            style={{ animationDelay: "180ms" }}
+          >
 
             {/* El mercado predice — datos en vivo de Polymarket */}
             <GraficaBanxico />
@@ -140,10 +151,8 @@ export default function PortadaGrid() {
                   <li key={c.label}>
                     <a
                       href={c.href}
-                      className="font-sans font-medium transition-colors"
+                      className="font-sans font-medium link-azul"
                       style={{ fontSize: "13px", color: "var(--color-azuldk)" }}
-                      onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-azul)")}
-                      onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-azuldk)")}
                     >
                       → {c.label}
                     </a>
@@ -166,7 +175,7 @@ export default function PortadaGrid() {
                 className="h-serif italic leading-snug mb-2"
                 style={{ fontSize: "18px", color: "var(--color-soft-dark)" }}
               >
-                "{columnaTeaser.cita}"
+                &#x201C;{columnaTeaser.cita}&#x201D;
               </p>
               <p
                 className="font-sans"

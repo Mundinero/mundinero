@@ -51,13 +51,14 @@ export default function NoticiasDia() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-          {noticias.map((n) => (
+          {noticias.map((n, i) => (
             <article
               key={n.titular}
-              className="rounded-xl p-5 flex flex-col gap-2.5 cursor-pointer transition-colors"
+              className="rounded-xl p-5 flex flex-col gap-2.5 cursor-pointer transition-colors fade-rise"
               style={{
-                background: "var(--color-surface-dark)",
-                border: "1px solid var(--color-hairline-dark)",
+                background:     "var(--color-surface-dark)",
+                border:         "1px solid var(--color-hairline-dark)",
+                animationDelay: `${300 + i * 40}ms`,
               }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLElement).style.borderColor = "var(--color-soft-dark)";

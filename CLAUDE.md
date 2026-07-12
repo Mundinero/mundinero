@@ -1,105 +1,82 @@
-# Mundinero — Design Brief v2
-
-Sistema de identidad sellado y verificado (contrastes WCAG AA calculados).
-
----
+# Mundinero — Design Brief
 
 ## Identidad
-
 - Producto: Medio financiero editorial de México y el mundo
 - Por: Monexus (marca registrada IMPI)
-- Tagline: "El futuro del dinero habla. Nosotros lo traducimos."
+- Tagline: "El futuro del dinero habla. Nosotros traducimos."
 - URL: mundinero.com
-- Lanzamiento: 2 de julio de 2026
 
-## Tono
+## Paleta de color
+- Tinta (bg dark): #1f1e1d
+- Crema (bg light): #F7F6F3
+- Azul light: #5170ff
+- Azul dark: #6B87FF
+- Verde light (positivo): #0B6B38
+- Verde dark (positivo): #34D87F
+- Rojo light (negativo): #A62820
+- Rojo dark (negativo): #FF6B6B
 
-Inteligente pero accesible. Autoridad editorial tipo Economist/FT, en español,
-con ancla en LatAm. La IA traduce y curra; la voz humana interpreta. Confianza
-es el producto: fuentes citadas, timestamps, "no es asesoría fiscal/financiera".
+## Imágenes
+- PROHIBIDO el uso de fotografía de stock de cualquier tipo
+- Lenguaje visual: gráficas propias de datos + fotos en duotono tinta/azul únicamente cuando sean editorialmente esenciales
+- Preferencia absoluta por visualizaciones de datos nativas sobre imágenes decorativas
 
----
+## Reglas de color
+- Verde y rojo SOLO para señales financieras binarias
+- Sobre badge de color brillante en dark: texto siempre #1f1e1d
+- Modo por defecto del sitio: dark (fondo tinta)
 
-## Tipografía — dos voces, roles separados
-
-**SERIF EDITORIAL → Fraunces** (titulares, logo/mancheta, columna, reportes, pull quotes)
-
-- Solo display. NUNCA en UI, botones o labels.
-- Eje WONK = 0 (formas serias, no juguetonas). SOFT = 0 (terminales nítidas).
-- Usar clase `.h-serif` en titulares grandes (aplica `font-variation-settings: 'opsz' 144, 'SOFT' 0, 'WONK' 0`).
-- Fallback dev: Cormorant Garamond → Georgia → serif.
-- Si se licencia Canela Text, entra primero y Fraunces pasa a fallback.
-  NO usar cortes pirata: vienen sin acentos.
-
-**SANS PRODUCTO/DATOS → Satoshi** (UI, navegación, cuerpo, números, ticker, calculadoras)
-
-- Gratis (Fontshare, OFL). Unifica con el universo Monexus.
-- Reemplaza IBM Plex Sans e IBM Plex Mono. Un solo sans para todo.
-- Fallback: Inter → system-ui → sans-serif.
-
----
-
-## Paleta
-
-### Lógica de temperatura
-
-Base cálida (papel crema / tinta café-negra) + único acento azul (frío).
-El contraste de temperatura hace que el azul resalte sin saturarlo.
-NO migrar a grises fríos: aplana el azul y queda como dashboard cripto genérico.
-
-### Neutrales
-
-| Token | Dark | Light |
-|-------|------|-------|
-| Fondo | `#1f1e1d` tinta | `#F7F6F3` crema |
-| Superficie/card | `#2a2928` surface-dark | `#ECEAE5` surface-light |
-| Borde/elevación | `#3a3833` hairline-dark | `#DEDBD4` hairline-light |
-| Texto terciario | `#8b887f` muted-dark (4.7 AA) | `#5F5E5A` muted-light (6.0 AA) |
-| Texto secundario | `#cfccc4` soft-dark (10.4) | `#B8B4AC` soft-light — SOLO bordes, nunca texto |
-| Texto primario | `#F7F6F3` crema (15.4 AAA) | `#1f1e1d` tinta (15.4 AAA) |
-
-### Azul (acento único)
-
-| Variante | Valor | Uso |
-|----------|-------|-----|
-| azuldk | `#6B87FF` | link/acento/badge en dark (5.18 AA) |
-| azul | `#5170FF` | fills/botones/mancheta en light (3.8 — solo grande) |
-| azul-text | `#3A57E8` | links y texto chico en light (5.24 AA) |
-| hover dark | `#8A9DFF` | — |
-| hover light | `#2E47C9` | — |
-| focus ring | `2px solid #6B87FF` / `#5170FF`, offset 2px | — |
-
-**Regla:** badge azul sobre tinta → texto siempre `#1f1e1d`.
-
-### Señales (SOLO deltas/ticker, nunca decorativas)
-
-| | Dark | Light |
-|-|------|-------|
-| Verde + | `#34D87F` positivo (8.9 AAA) | `#0B6B38` verde-light (6.1 AA) |
-| Rojo − | `#FF6B6B` negativo (6.0 AA) | `#A62820` rojo-light (6.6 AA) |
-
-Badge verde/rojo: texto siempre `#1f1e1d` (tinta).
-
-### Reglas absolutas de color
-
-- Verde y rojo EXCLUSIVAMENTE para señales financieras binarias.
-- `soft-light` (#B8B4AC) da 1.9 contra crema — solo bordes/divisores, nunca texto.
-- Sin gradientes decorativos. Flat, tipográfico, mucho espacio en blanco.
-- Jerarquía por grises + tamaño, no por color. ~90% neutro.
-- Modo por defecto: dark (fondo tinta).
-
----
+## Tipografía
+- Serif (titulares/columna): Newsreader — Google Fonts (variable: --font-serif)
+- Sans (UI/cuerpo/etiquetas): IBM Plex Sans — Google Fonts (variable: --font-sans)
+- Mono (ticker/cifras/datos): IBM Plex Mono — Google Fonts (variable: --font-mono)
+- Logo: Canela Text (solo marca, no replicar en código)
+- Estilo: editorial flat, sin gradientes decorativos
 
 ## Stack
-
-- Framework: Next.js (App Router)
-- Estilos: Tailwind CSS v4 con @theme en globals.css
-- Animaciones: Framer Motion (entradas staggered, sutiles)
+- Framework: Next.js 16 App Router
+- Estilos: Tailwind CSS v4 con tokens de Mundinero
+- Animaciones: Framer Motion
 - CMS: Ghost (headless API)
-- Deploy: Vercel
+- Deploy: Vercel (main → mundinero.com)
 
 ## Ramas
+- main: producción → mundinero.com (solo coming soon por ahora)
+- preview: sitio completo en construcción → URL de preview Vercel
 
-- `main`: producción → mundinero.com (coming soon con countdown). NO tocar hasta el 2 jul.
-- `preview`: sitio completo en construcción → URL de preview Vercel.
-- Todo se construye en preview; el 2 de julio preview → main.
+## Estado del proyecto — 28 mayo 2026
+
+### Rama main (mundinero.com — coming soon)
+- index.html: página coming soon con countdown al 8 jun 2026
+- Ticker flotante estilo liquid glass pill con datos reales:
+  - Binance API: BTC, ETH, XRP, SOL
+  - fawazahmed0: USD/MXN, EUR/MXN
+  - Yahoo Finance: IPC BMV (^MXX), S&P 500 (^GSPC), NASDAQ (^IXIC)
+  - Estáticos: BANXICO 6.50%, CETES 6.54%, INFLACIÓN 4.45%,
+    REAL YIELD +2.09%, SAL.MÍN $278.80, UMA $113.14,
+    ORO $3020, WTI $71.4, MAGNA $24.50, PREMIUM $26.00
+  - GitHub Actions workflow: actualización automática
+    8am y 3:30pm CST (falta agregar BANXICO_TOKEN e INEGI_TOKEN)
+- Wallpapers rotantes cada 5s desde carpeta /Wallpapers/
+- Crédito de foto: nombre del archivo como texto
+- Elemento circular giratorio con 3 PNGs (mun 2,3,4.png)
+- vercel.json: sirve index.html como estático
+
+### Rama preview (URL de preview Vercel)
+- Next.js 14 + TypeScript + Tailwind + Framer Motion
+- Componentes construidos: Ticker, Nav, Hero, RadarMundinero,
+  PulsoMX (con calculadora de remesas), ArticulosGrid,
+  LaColumna, Eventos, Newsletter, Footer
+- Tipografía: Newsreader (serif) + IBM Plex Sans + IBM Plex Mono
+- Design system configurado en tailwind.config.ts
+
+### Pendientes inmediatos
+- Agregar BANXICO_TOKEN e INEGI_TOKEN en GitHub Secrets
+- Integrar Beehiiv al formulario del coming soon
+- Conectar mundinero.com a rama preview el 8 de junio
+
+### Archivos de assets en raíz
+- Mudinerolso.svg, Mundinero.svg: logos
+- mun 2.png, mun 3.png, mun 4.png: elementos del sello giratorio
+- mundinerolso.png, mundineronav.jpg/png: variantes del logo
+- Wallpapers/: 4 imágenes con nombres como crédito
