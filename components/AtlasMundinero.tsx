@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import createGlobe from "cobe";
+import createGlobe, { Globe } from "cobe";
 import { useTheme } from "./ThemeProvider";
 
 // Coordenadas [lat, lng] — corredores financieros clave del Atlas
@@ -26,7 +26,8 @@ function GlobeCanvas({ theme }: { theme: string }) {
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     let phi = 1.85; // Atlántico al centro: América izq., Europa der.
-    let globe: ReturnType<typeof createGlobe> | undefined;
+    let globe: Globe | undefined;
+    let rafId = 0;
 
     try {
       globe = createGlobe(canvas, {
@@ -39,28 +40,32 @@ function GlobeCanvas({ theme }: { theme: string }) {
         diffuse:       0.42,
         mapSamples:    16000,
         mapBrightness: isLight ? 1.0 : 1.7,
-        // En dark: baseColor = tinta → el océano se funde con el fondo
-        // En light: baseColor = crema → ídem
         baseColor:  isLight
           ? [0.969, 0.965, 0.953]   // crema #F7F6F3
           : [0.122, 0.118, 0.114],  // tinta #1f1e1d
         markerColor: [0.42, 0.529, 1.0],   // #6B87FF
         glowColor:   isLight
-          ? [0.78, 0.83, 1.0]   // halo azul muy suave sobre claro
-          : [0.22, 0.30, 0.72], // halo azul muy suave sobre oscuro
+          ? [0.78, 0.83, 1.0]
+          : [0.22, 0.30, 0.72],
         markers: MARKERS,
-        onRender: (state) => {
-          if (!prefersReducedMotion) {
-            phi += 0.0014; // rotación lentísima
-            state.phi = phi;
-          }
-        },
       });
+
+      if (!prefersReducedMotion) {
+        const animate = () => {
+          phi += 0.0014;
+          globe?.update({ phi });
+          rafId = requestAnimationFrame(animate);
+        };
+        rafId = requestAnimationFrame(animate);
+      }
     } catch {
       // WebGL no disponible — el canvas queda oculto
     }
 
-    return () => globe?.destroy();
+    return () => {
+      cancelAnimationFrame(rafId);
+      globe?.destroy();
+    };
   }, [theme]);
 
   return (
