@@ -1,6 +1,7 @@
 import Ticker from "@/components/Ticker";
 import ManchetaNav from "@/components/ManchetaNav";
 import PortadaGrid from "@/components/PortadaGrid";
+import AtlasMundinero from "@/components/AtlasMundinero";
 import Breves from "@/components/Breves";
 import NoticiasDia from "@/components/NoticiasDia";
 import RadarMundinero from "@/components/RadarMundinero";
@@ -21,6 +22,7 @@ export default function Home() {
       <ManchetaNav />
       <main>
         <PortadaGrid />
+        <AtlasMundinero />
         <Breves />
         <NoticiasDia />
         <RadarMundinero />
